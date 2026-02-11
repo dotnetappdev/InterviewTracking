@@ -26,7 +26,7 @@ public partial class InterviewDetailViewModel : BaseViewModel
     {
         if (Guid.TryParse(value, out var id))
         {
-            LoadInterviewAsync(id).ConfigureAwait(false);
+            _ = LoadInterviewAsync(id);
         }
     }
 

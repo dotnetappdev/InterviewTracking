@@ -68,7 +68,7 @@ public partial class AddEditInterviewViewModel : BaseViewModel
         {
             IsEditMode = true;
             Title = "Edit Interview";
-            LoadInterviewAsync(id).ConfigureAwait(false);
+            _ = LoadInterviewAsync(id);
         }
     }
 
