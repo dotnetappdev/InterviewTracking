@@ -16,6 +16,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Interviewer> Interviewers { get; set; }
     public DbSet<Reminder> Reminders { get; set; }
     public DbSet<MeetingPlatformType> MeetingPlatformTypes { get; set; }
+    public DbSet<JobSource> JobSources { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -40,6 +41,13 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             .WithMany(m => m.Interviews)
             .HasForeignKey(i => i.MeetingPlatformTypeId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        // Configure Interview -> JobSource relationship
+        builder.Entity<Interview>()
+            .HasOne(i => i.JobSource)
+            .WithMany(j => j.Interviews)
+            .HasForeignKey(i => i.JobSourceId)
+            .OnDelete(DeleteBehavior.SetNull);
 
         // Seed MeetingPlatformTypes
         builder.Entity<MeetingPlatformType>().HasData(
@@ -76,6 +84,66 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
                 PlatformType = MeetingPlatform.Other,
                 Name = "Other",
                 Description = "Other meeting platforms",
+                IconUrl = "other_icon.png",
+                IsActive = true
+            }
+        );
+
+        // Seed JobSources
+        builder.Entity<JobSource>().HasData(
+            new JobSource
+            {
+                Id = 1,
+                Name = "LinkedIn",
+                Description = "LinkedIn job postings",
+                IconUrl = "linkedin_icon.png",
+                IsActive = true
+            },
+            new JobSource
+            {
+                Id = 2,
+                Name = "Indeed",
+                Description = "Indeed job search",
+                IconUrl = "indeed_icon.png",
+                IsActive = true
+            },
+            new JobSource
+            {
+                Id = 3,
+                Name = "Glassdoor",
+                Description = "Glassdoor job listings",
+                IconUrl = "glassdoor_icon.png",
+                IsActive = true
+            },
+            new JobSource
+            {
+                Id = 4,
+                Name = "Company Website",
+                Description = "Direct company career page",
+                IconUrl = "company_icon.png",
+                IsActive = true
+            },
+            new JobSource
+            {
+                Id = 5,
+                Name = "Referral",
+                Description = "Employee or professional referral",
+                IconUrl = "referral_icon.png",
+                IsActive = true
+            },
+            new JobSource
+            {
+                Id = 6,
+                Name = "Recruiter",
+                Description = "Contacted by recruiter",
+                IconUrl = "recruiter_icon.png",
+                IsActive = true
+            },
+            new JobSource
+            {
+                Id = 7,
+                Name = "Other",
+                Description = "Other job sources",
                 IconUrl = "other_icon.png",
                 IsActive = true
             }

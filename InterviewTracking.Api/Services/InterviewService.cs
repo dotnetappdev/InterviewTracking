@@ -20,6 +20,7 @@ public class InterviewService : IInterviewService
             .Include(i => i.Interviewers)
             .Include(i => i.Reminders)
             .Include(i => i.MeetingPlatformType)
+            .Include(i => i.JobSource)
             .OrderBy(i => i.DateTime)
             .ToListAsync();
     }
@@ -30,6 +31,7 @@ public class InterviewService : IInterviewService
             .Include(i => i.Interviewers)
             .Include(i => i.Reminders)
             .Include(i => i.MeetingPlatformType)
+            .Include(i => i.JobSource)
             .FirstOrDefaultAsync(i => i.Id == id && i.UserId == userId);
     }
 

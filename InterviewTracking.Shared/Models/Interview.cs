@@ -21,6 +21,13 @@ public class Interview
     public string MeetingLink { get; set; } = string.Empty;
     public string UserId { get; set; } = string.Empty;
     
+    // Interview status and job information
+    public InterviewStatus Status { get; set; } = InterviewStatus.Scheduled;
+    public int? JobSourceId { get; set; }
+    public JobSource? JobSource { get; set; }
+    public string JobTitle { get; set; } = string.Empty;
+    public string CompanyName { get; set; } = string.Empty;
+    
     // Recurrence properties
     public bool IsRecurring { get; set; }
     public RecurrencePattern? RecurrencePattern { get; set; }
@@ -51,4 +58,21 @@ public enum RecurrencePattern
     BiWeekly,
     Monthly,
     Custom
+}
+
+public enum InterviewStatus
+{
+    Scheduled,
+    Stage1,
+    Stage2,
+    Stage3,
+    Stage4,
+    Stage5,
+    FinalRound,
+    Completed,
+    NotInterviewed,
+    DidNotShowUp,
+    Cancelled,
+    Rejected,
+    OfferReceived
 }

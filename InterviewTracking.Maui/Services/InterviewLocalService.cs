@@ -25,6 +25,7 @@ public class InterviewLocalService : IInterviewLocalService
             .Include(i => i.Interviewers)
             .Include(i => i.Reminders)
             .Include(i => i.MeetingPlatformType)
+            .Include(i => i.JobSource)
             .OrderBy(i => i.DateTime)
             .ToListAsync();
     }
@@ -35,6 +36,7 @@ public class InterviewLocalService : IInterviewLocalService
             .Include(i => i.Interviewers)
             .Include(i => i.Reminders)
             .Include(i => i.MeetingPlatformType)
+            .Include(i => i.JobSource)
             .FirstOrDefaultAsync(i => i.Id == id);
     }
 
@@ -111,6 +113,7 @@ public class InterviewLocalService : IInterviewLocalService
             .Include(i => i.Interviewers)
             .Include(i => i.Reminders)
             .Include(i => i.MeetingPlatformType)
+            .Include(i => i.JobSource)
             .Where(i => i.DateTime >= now)
             .OrderBy(i => i.DateTime)
             .ToListAsync();
