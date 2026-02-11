@@ -11,6 +11,7 @@ public partial class AddEditInterviewViewModel : BaseViewModel
 {
     private readonly IInterviewLocalService _interviewService;
     private readonly INotificationService _notificationService;
+    private readonly IMeetingPlatformService _platformService;
 
     [ObservableProperty]
     private string interviewId = string.Empty;
@@ -28,7 +29,7 @@ public partial class AddEditInterviewViewModel : BaseViewModel
     private string notes = string.Empty;
 
     [ObservableProperty]
-    private MeetingPlatform selectedPlatform = MeetingPlatform.Zoom;
+    private MeetingPlatformType? selectedPlatformType;
 
     [ObservableProperty]
     private string meetingLink = string.Empty;
@@ -47,19 +48,42 @@ public partial class AddEditInterviewViewModel : BaseViewModel
 
     private Interview? _originalInterview;
 
-    public ObservableCollection<MeetingPlatform> Platforms { get; } = new()
-    {
-        MeetingPlatform.Zoom,
-        MeetingPlatform.GoogleMeet,
-        MeetingPlatform.MicrosoftTeams,
-        MeetingPlatform.Other
-    };
+    public ObservableCollection<MeetingPlatformType> PlatformTypes { get; } = new();
 
-    public AddEditInterviewViewModel(IInterviewLocalService interviewService, INotificationService notificationService)
+    public AddEditInterviewViewModel(
+        IInterviewLocalService interviewService, 
+        INotificationService notificationService,
+        IMeetingPlatformService platformService)
     {
         _interviewService = interviewService;
         _notificationService = notificationService;
+        _platformService = platformService;
         Title = "Add Interview";
+        
+        _ = LoadPlatformTypesAsync();
+    }
+
+    private async Task LoadPlatformTypesAsync()
+    {
+        try
+        {
+            var platforms = await _platformService.GetAllPlatformsAsync();
+            PlatformTypes.Clear();
+            foreach (var platform in platforms)
+            {
+                PlatformTypes.Add(platform);
+            }
+            
+            // Set default platform
+            if (PlatformTypes.Count > 0 && SelectedPlatformType == null)
+            {
+                SelectedPlatformType = PlatformTypes[0]; // Default to first (Zoom)
+            }
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlertAsync("Error", $"Failed to load meeting platforms: {ex.Message}", "OK");
+        }
     }
 
     partial void OnInterviewIdChanged(string value)
@@ -87,7 +111,7 @@ public partial class AddEditInterviewViewModel : BaseViewModel
                 InterviewDate = _originalInterview.DateTime.Date;
                 InterviewTime = _originalInterview.DateTime.TimeOfDay;
                 Notes = _originalInterview.Notes;
-                SelectedPlatform = _originalInterview.Platform;
+                SelectedPlatformType = _originalInterview.MeetingPlatformType;
                 MeetingLink = _originalInterview.MeetingLink;
                 IsRecurring = _originalInterview.IsRecurring;
                 RecurrencePattern = _originalInterview.RecurrencePattern;
@@ -101,7 +125,7 @@ public partial class AddEditInterviewViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Error", $"Failed to load interview: {ex.Message}", "OK");
+            await Shell.Current.DisplayAlertAsync("Error", $"Failed to load interview: {ex.Message}", "OK");
         }
         finally
         {
@@ -116,7 +140,13 @@ public partial class AddEditInterviewViewModel : BaseViewModel
 
         if (string.IsNullOrWhiteSpace(InterviewTitle))
         {
-            await Shell.Current.DisplayAlert("Validation Error", "Please enter an interview title", "OK");
+            await Shell.Current.DisplayAlertAsync("Validation Error", "Please enter an interview title", "OK");
+            return;
+        }
+
+        if (SelectedPlatformType == null)
+        {
+            await Shell.Current.DisplayAlertAsync("Validation Error", "Please select a meeting platform", "OK");
             return;
         }
 
@@ -130,7 +160,7 @@ public partial class AddEditInterviewViewModel : BaseViewModel
                 Title = InterviewTitle,
                 DateTime = InterviewDate.Date + InterviewTime,
                 Notes = Notes,
-                Platform = SelectedPlatform,
+                MeetingPlatformTypeId = SelectedPlatformType.Id,
                 MeetingLink = MeetingLink,
                 IsRecurring = IsRecurring,
                 RecurrencePattern = RecurrencePattern,
@@ -150,7 +180,7 @@ public partial class AddEditInterviewViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Error", $"Failed to save interview: {ex.Message}", "OK");
+            await Shell.Current.DisplayAlertAsync("Error", $"Failed to save interview: {ex.Message}", "OK");
         }
         finally
         {

@@ -854,6 +854,133 @@
           "lib/net6.0/SQLitePCLRaw.provider.e_sqlite3.dll": {}
         }
       },
+      "Syncfusion.Licensing/27.2.2": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/Syncfusion.Licensing.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0/Syncfusion.Licensing.dll": {}
+        }
+      },
+      "Syncfusion.Maui.Calendar/27.2.2": {
+        "type": "package",
+        "dependencies": {
+          "Syncfusion.Maui.Core": "27.2.2",
+          "Syncfusion.Maui.Popup": "27.2.2"
+        },
+        "compile": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Calendar.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Calendar.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Syncfusion.Maui.Core/27.2.2": {
+        "type": "package",
+        "dependencies": {
+          "Syncfusion.Licensing": "27.2.2"
+        },
+        "compile": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/Syncfusion.Maui.Core.props": {}
+        }
+      },
+      "Syncfusion.Maui.DataSource/27.2.2": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.DataSource.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.DataSource.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Syncfusion.Maui.GridCommon/27.2.2": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.GridCommon.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.GridCommon.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Syncfusion.Maui.Inputs/27.2.2": {
+        "type": "package",
+        "dependencies": {
+          "Syncfusion.Maui.Core": "27.2.2",
+          "Syncfusion.Maui.ListView": "27.2.2"
+        },
+        "compile": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Inputs.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Inputs.dll": {
+            "related": ".xml"
+          }
+        },
+        "resource": {
+          "lib/net9.0-android34.0/en-US/Syncfusion.Maui.Inputs.resources.dll": {
+            "locale": "en-US"
+          }
+        }
+      },
+      "Syncfusion.Maui.ListView/27.2.2": {
+        "type": "package",
+        "dependencies": {
+          "Syncfusion.Maui.Core": "27.2.2",
+          "Syncfusion.Maui.DataSource": "27.2.2",
+          "Syncfusion.Maui.GridCommon": "27.2.2"
+        },
+        "compile": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.ListView.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.ListView.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Syncfusion.Maui.Popup/27.2.2": {
+        "type": "package",
+        "dependencies": {
+          "Syncfusion.Maui.Core": "27.2.2"
+        },
+        "compile": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Popup.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Popup.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Xamarin.Android.Glide/4.16.0.14": {
         "type": "package",
         "dependencies": {
@@ -3709,6 +3836,133 @@
           "lib/net6.0/SQLitePCLRaw.provider.e_sqlite3.dll": {}
         }
       },
+      "Syncfusion.Licensing/27.2.2": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/Syncfusion.Licensing.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0/Syncfusion.Licensing.dll": {}
+        }
+      },
+      "Syncfusion.Maui.Calendar/27.2.2": {
+        "type": "package",
+        "dependencies": {
+          "Syncfusion.Maui.Core": "27.2.2",
+          "Syncfusion.Maui.Popup": "27.2.2"
+        },
+        "compile": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Calendar.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Calendar.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Syncfusion.Maui.Core/27.2.2": {
+        "type": "package",
+        "dependencies": {
+          "Syncfusion.Licensing": "27.2.2"
+        },
+        "compile": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/Syncfusion.Maui.Core.props": {}
+        }
+      },
+      "Syncfusion.Maui.DataSource/27.2.2": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.DataSource.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.DataSource.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Syncfusion.Maui.GridCommon/27.2.2": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.GridCommon.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.GridCommon.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Syncfusion.Maui.Inputs/27.2.2": {
+        "type": "package",
+        "dependencies": {
+          "Syncfusion.Maui.Core": "27.2.2",
+          "Syncfusion.Maui.ListView": "27.2.2"
+        },
+        "compile": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Inputs.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Inputs.dll": {
+            "related": ".xml"
+          }
+        },
+        "resource": {
+          "lib/net9.0-android34.0/en-US/Syncfusion.Maui.Inputs.resources.dll": {
+            "locale": "en-US"
+          }
+        }
+      },
+      "Syncfusion.Maui.ListView/27.2.2": {
+        "type": "package",
+        "dependencies": {
+          "Syncfusion.Maui.Core": "27.2.2",
+          "Syncfusion.Maui.DataSource": "27.2.2",
+          "Syncfusion.Maui.GridCommon": "27.2.2"
+        },
+        "compile": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.ListView.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.ListView.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Syncfusion.Maui.Popup/27.2.2": {
+        "type": "package",
+        "dependencies": {
+          "Syncfusion.Maui.Core": "27.2.2"
+        },
+        "compile": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Popup.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Popup.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Xamarin.Android.Glide/4.16.0.14": {
         "type": "package",
         "dependencies": {
@@ -6562,6 +6816,133 @@
         },
         "runtime": {
           "lib/net6.0/SQLitePCLRaw.provider.e_sqlite3.dll": {}
+        }
+      },
+      "Syncfusion.Licensing/27.2.2": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/Syncfusion.Licensing.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0/Syncfusion.Licensing.dll": {}
+        }
+      },
+      "Syncfusion.Maui.Calendar/27.2.2": {
+        "type": "package",
+        "dependencies": {
+          "Syncfusion.Maui.Core": "27.2.2",
+          "Syncfusion.Maui.Popup": "27.2.2"
+        },
+        "compile": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Calendar.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Calendar.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Syncfusion.Maui.Core/27.2.2": {
+        "type": "package",
+        "dependencies": {
+          "Syncfusion.Licensing": "27.2.2"
+        },
+        "compile": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/Syncfusion.Maui.Core.props": {}
+        }
+      },
+      "Syncfusion.Maui.DataSource/27.2.2": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.DataSource.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.DataSource.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Syncfusion.Maui.GridCommon/27.2.2": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.GridCommon.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.GridCommon.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Syncfusion.Maui.Inputs/27.2.2": {
+        "type": "package",
+        "dependencies": {
+          "Syncfusion.Maui.Core": "27.2.2",
+          "Syncfusion.Maui.ListView": "27.2.2"
+        },
+        "compile": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Inputs.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Inputs.dll": {
+            "related": ".xml"
+          }
+        },
+        "resource": {
+          "lib/net9.0-android34.0/en-US/Syncfusion.Maui.Inputs.resources.dll": {
+            "locale": "en-US"
+          }
+        }
+      },
+      "Syncfusion.Maui.ListView/27.2.2": {
+        "type": "package",
+        "dependencies": {
+          "Syncfusion.Maui.Core": "27.2.2",
+          "Syncfusion.Maui.DataSource": "27.2.2",
+          "Syncfusion.Maui.GridCommon": "27.2.2"
+        },
+        "compile": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.ListView.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.ListView.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Syncfusion.Maui.Popup/27.2.2": {
+        "type": "package",
+        "dependencies": {
+          "Syncfusion.Maui.Core": "27.2.2"
+        },
+        "compile": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Popup.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0-android34.0/Syncfusion.Maui.Popup.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Xamarin.Android.Glide/4.16.0.14": {
@@ -10212,6 +10593,324 @@
         "sqlitepclraw.provider.e_sqlite3.nuspec"
       ]
     },
+    "Syncfusion.Licensing/27.2.2": {
+      "sha512": "dhfD4qMrtzManAzH0ERFREh3cS1CPB23eReSDJBze03H6z601y1/MP/0N/rYZUMW53vdFpRPsCCfUAXq5CNS+w==",
+      "type": "package",
+      "path": "syncfusion.licensing/27.2.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "README.md",
+        "lib/MonoAndroid90/Syncfusion.Licensing.dll",
+        "lib/Xamarin.Mac/Syncfusion.Licensing.dll",
+        "lib/Xamarin.iOS10/Syncfusion.Licensing.dll",
+        "lib/net40/Syncfusion.Licensing.dll",
+        "lib/net45/Syncfusion.Licensing.dll",
+        "lib/net462/Syncfusion.Licensing.dll",
+        "lib/net6.0/Syncfusion.Licensing.dll",
+        "lib/net7.0/Syncfusion.Licensing.dll",
+        "lib/net8.0/Syncfusion.Licensing.dll",
+        "lib/net9.0/Syncfusion.Licensing.dll",
+        "lib/netstandard2.0/Syncfusion.Licensing.dll",
+        "lib/uap10.0/Syncfusion.Licensing.dll",
+        "syncfusion.licensing.27.2.2.nupkg.sha512",
+        "syncfusion.licensing.nuspec",
+        "syncfusion_logo.png"
+      ]
+    },
+    "Syncfusion.Maui.Calendar/27.2.2": {
+      "sha512": "xPP9ra2FqYRRPVR8l3LuUwFW5CqKicDaWQ7ckyjoRQS+bAfGE5qXwHbFNwQxGGGxq1YBCYd9XPE2yUT2KiiH/g==",
+      "type": "package",
+      "path": "syncfusion.maui.calendar/27.2.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "README.md",
+        "lib/net8.0-android34.0/Syncfusion.Maui.Calendar.dll",
+        "lib/net8.0-android34.0/Syncfusion.Maui.Calendar.xml",
+        "lib/net8.0-ios16.1/Syncfusion.Maui.Calendar.dll",
+        "lib/net8.0-ios16.1/Syncfusion.Maui.Calendar.xml",
+        "lib/net8.0-maccatalyst16.1/Syncfusion.Maui.Calendar.dll",
+        "lib/net8.0-maccatalyst16.1/Syncfusion.Maui.Calendar.xml",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.Calendar.deps.json",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.Calendar.dll",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.Calendar.xml",
+        "lib/net8.0/Syncfusion.Maui.Calendar.deps.json",
+        "lib/net8.0/Syncfusion.Maui.Calendar.dll",
+        "lib/net8.0/Syncfusion.Maui.Calendar.xml",
+        "lib/net9.0-android34.0/Syncfusion.Maui.Calendar.dll",
+        "lib/net9.0-android34.0/Syncfusion.Maui.Calendar.xml",
+        "lib/net9.0-ios16.1/Syncfusion.Maui.Calendar.dll",
+        "lib/net9.0-ios16.1/Syncfusion.Maui.Calendar.xml",
+        "lib/net9.0-maccatalyst16.1/Syncfusion.Maui.Calendar.dll",
+        "lib/net9.0-maccatalyst16.1/Syncfusion.Maui.Calendar.xml",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.Calendar.deps.json",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.Calendar.dll",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.Calendar.xml",
+        "lib/net9.0/Syncfusion.Maui.Calendar.deps.json",
+        "lib/net9.0/Syncfusion.Maui.Calendar.dll",
+        "lib/net9.0/Syncfusion.Maui.Calendar.xml",
+        "syncfusion.maui.calendar.27.2.2.nupkg.sha512",
+        "syncfusion.maui.calendar.nuspec",
+        "syncfusion_logo.png"
+      ]
+    },
+    "Syncfusion.Maui.Core/27.2.2": {
+      "sha512": "FHQbG2OTbaZXf5M2WAA0grPXR/L8N7EqHEyzVNzr6j9uwyrGabtDqhRSftOGohLkJVjSDu/n4p6nEXrNNgUJoQ==",
+      "type": "package",
+      "path": "syncfusion.maui.core/27.2.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "README.md",
+        "buildTransitive/Resources/Fonts/MauiMaterialAssets.ttf",
+        "buildTransitive/Syncfusion.Maui.Core.props",
+        "lib/net8.0-android34.0/Syncfusion.Maui.Core.dll",
+        "lib/net8.0-android34.0/Syncfusion.Maui.Core.xml",
+        "lib/net8.0-ios16.1/Syncfusion.Maui.Core.dll",
+        "lib/net8.0-ios16.1/Syncfusion.Maui.Core.xml",
+        "lib/net8.0-maccatalyst16.1/Syncfusion.Maui.Core.dll",
+        "lib/net8.0-maccatalyst16.1/Syncfusion.Maui.Core.xml",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.Core.deps.json",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.Core.dll",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.Core.pri",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.Core.xml",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.Core/Platform/Windows/Styles/CarouselStyles.xaml",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.Core/Platform/Windows/Styles/CarouselStyles.xbf",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.Core/Platform/Windows/Styles/Resources.xaml",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.Core/Platform/Windows/Styles/Resources.xbf",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.Core/Platform/Windows/Styles/RotatorStyles.xaml",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.Core/Platform/Windows/Styles/RotatorStyles.xbf",
+        "lib/net8.0/Syncfusion.Maui.Core.deps.json",
+        "lib/net8.0/Syncfusion.Maui.Core.dll",
+        "lib/net8.0/Syncfusion.Maui.Core.xml",
+        "lib/net9.0-android34.0/Syncfusion.Maui.Core.dll",
+        "lib/net9.0-android34.0/Syncfusion.Maui.Core.xml",
+        "lib/net9.0-ios16.1/Syncfusion.Maui.Core.dll",
+        "lib/net9.0-ios16.1/Syncfusion.Maui.Core.xml",
+        "lib/net9.0-maccatalyst16.1/Syncfusion.Maui.Core.dll",
+        "lib/net9.0-maccatalyst16.1/Syncfusion.Maui.Core.xml",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.Core.deps.json",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.Core.dll",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.Core.pri",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.Core.xml",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.Core/Platform/Windows/Styles/CarouselStyles.xaml",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.Core/Platform/Windows/Styles/CarouselStyles.xbf",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.Core/Platform/Windows/Styles/Resources.xaml",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.Core/Platform/Windows/Styles/Resources.xbf",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.Core/Platform/Windows/Styles/RotatorStyles.xaml",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.Core/Platform/Windows/Styles/RotatorStyles.xbf",
+        "lib/net9.0/Syncfusion.Maui.Core.deps.json",
+        "lib/net9.0/Syncfusion.Maui.Core.dll",
+        "lib/net9.0/Syncfusion.Maui.Core.xml",
+        "syncfusion.maui.core.27.2.2.nupkg.sha512",
+        "syncfusion.maui.core.nuspec",
+        "syncfusion_logo.png"
+      ]
+    },
+    "Syncfusion.Maui.DataSource/27.2.2": {
+      "sha512": "mPCRPfuNJLrKLmRWCoUAzBoB2BupdF6ZR7T9ygRu1zmVxNPHNzQN/RXhNP5/P9WcvhN+5iTW6IOwbvJ0r+SglA==",
+      "type": "package",
+      "path": "syncfusion.maui.datasource/27.2.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "README.md",
+        "lib/net8.0-android34.0/Syncfusion.Maui.DataSource.dll",
+        "lib/net8.0-android34.0/Syncfusion.Maui.DataSource.xml",
+        "lib/net8.0-ios16.1/Syncfusion.Maui.DataSource.dll",
+        "lib/net8.0-ios16.1/Syncfusion.Maui.DataSource.xml",
+        "lib/net8.0-maccatalyst16.1/Syncfusion.Maui.DataSource.dll",
+        "lib/net8.0-maccatalyst16.1/Syncfusion.Maui.DataSource.xml",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.DataSource.deps.json",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.DataSource.dll",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.DataSource.xml",
+        "lib/net8.0/Syncfusion.Maui.DataSource.deps.json",
+        "lib/net8.0/Syncfusion.Maui.DataSource.dll",
+        "lib/net8.0/Syncfusion.Maui.DataSource.xml",
+        "lib/net9.0-android34.0/Syncfusion.Maui.DataSource.dll",
+        "lib/net9.0-android34.0/Syncfusion.Maui.DataSource.xml",
+        "lib/net9.0-ios16.1/Syncfusion.Maui.DataSource.dll",
+        "lib/net9.0-ios16.1/Syncfusion.Maui.DataSource.xml",
+        "lib/net9.0-maccatalyst16.1/Syncfusion.Maui.DataSource.dll",
+        "lib/net9.0-maccatalyst16.1/Syncfusion.Maui.DataSource.xml",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.DataSource.deps.json",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.DataSource.dll",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.DataSource.xml",
+        "lib/net9.0/Syncfusion.Maui.DataSource.deps.json",
+        "lib/net9.0/Syncfusion.Maui.DataSource.dll",
+        "lib/net9.0/Syncfusion.Maui.DataSource.xml",
+        "syncfusion.maui.datasource.27.2.2.nupkg.sha512",
+        "syncfusion.maui.datasource.nuspec",
+        "syncfusion_logo.png"
+      ]
+    },
+    "Syncfusion.Maui.GridCommon/27.2.2": {
+      "sha512": "upzb5dkoxRkQAAi7Tgm9ml3VGlSMuglVcM0P5oTkmMeDI0/ydbVP6gXTXr1WFuydypX1hlSpJTBAWB/OalV2iw==",
+      "type": "package",
+      "path": "syncfusion.maui.gridcommon/27.2.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "README.md",
+        "lib/net8.0-android34.0/Syncfusion.Maui.GridCommon.dll",
+        "lib/net8.0-android34.0/Syncfusion.Maui.GridCommon.xml",
+        "lib/net8.0-ios16.1/Syncfusion.Maui.GridCommon.dll",
+        "lib/net8.0-ios16.1/Syncfusion.Maui.GridCommon.xml",
+        "lib/net8.0-maccatalyst16.1/Syncfusion.Maui.GridCommon.dll",
+        "lib/net8.0-maccatalyst16.1/Syncfusion.Maui.GridCommon.xml",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.GridCommon.deps.json",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.GridCommon.dll",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.GridCommon.xml",
+        "lib/net8.0/Syncfusion.Maui.GridCommon.deps.json",
+        "lib/net8.0/Syncfusion.Maui.GridCommon.dll",
+        "lib/net8.0/Syncfusion.Maui.GridCommon.xml",
+        "lib/net9.0-android34.0/Syncfusion.Maui.GridCommon.dll",
+        "lib/net9.0-android34.0/Syncfusion.Maui.GridCommon.xml",
+        "lib/net9.0-ios16.1/Syncfusion.Maui.GridCommon.dll",
+        "lib/net9.0-ios16.1/Syncfusion.Maui.GridCommon.xml",
+        "lib/net9.0-maccatalyst16.1/Syncfusion.Maui.GridCommon.dll",
+        "lib/net9.0-maccatalyst16.1/Syncfusion.Maui.GridCommon.xml",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.GridCommon.deps.json",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.GridCommon.dll",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.GridCommon.xml",
+        "lib/net9.0/Syncfusion.Maui.GridCommon.deps.json",
+        "lib/net9.0/Syncfusion.Maui.GridCommon.dll",
+        "lib/net9.0/Syncfusion.Maui.GridCommon.xml",
+        "syncfusion.maui.gridcommon.27.2.2.nupkg.sha512",
+        "syncfusion.maui.gridcommon.nuspec",
+        "syncfusion_logo.png"
+      ]
+    },
+    "Syncfusion.Maui.Inputs/27.2.2": {
+      "sha512": "bRC0XA3/N3GoDhvp24FYfWpRZRTKmtkOpuI3vmbRGn1pc0870KdmFSB8L7jSxvrrNYI+w/fl0uAYoNfXJiDrEA==",
+      "type": "package",
+      "path": "syncfusion.maui.inputs/27.2.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "README.md",
+        "lib/net8.0-android34.0/Syncfusion.Maui.Inputs.dll",
+        "lib/net8.0-android34.0/Syncfusion.Maui.Inputs.xml",
+        "lib/net8.0-android34.0/en-US/Syncfusion.Maui.Inputs.resources.dll",
+        "lib/net8.0-ios16.1/Syncfusion.Maui.Inputs.dll",
+        "lib/net8.0-ios16.1/Syncfusion.Maui.Inputs.xml",
+        "lib/net8.0-ios16.1/en-US/Syncfusion.Maui.Inputs.resources.dll",
+        "lib/net8.0-maccatalyst16.1/Syncfusion.Maui.Inputs.dll",
+        "lib/net8.0-maccatalyst16.1/Syncfusion.Maui.Inputs.xml",
+        "lib/net8.0-maccatalyst16.1/en-US/Syncfusion.Maui.Inputs.resources.dll",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.Inputs.deps.json",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.Inputs.dll",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.Inputs.xml",
+        "lib/net8.0-windows10.0.19041.0/en-US/Syncfusion.Maui.Inputs.resources.dll",
+        "lib/net8.0/Syncfusion.Maui.Inputs.deps.json",
+        "lib/net8.0/Syncfusion.Maui.Inputs.dll",
+        "lib/net8.0/Syncfusion.Maui.Inputs.xml",
+        "lib/net8.0/en-US/Syncfusion.Maui.Inputs.resources.dll",
+        "lib/net9.0-android34.0/Syncfusion.Maui.Inputs.dll",
+        "lib/net9.0-android34.0/Syncfusion.Maui.Inputs.xml",
+        "lib/net9.0-android34.0/en-US/Syncfusion.Maui.Inputs.resources.dll",
+        "lib/net9.0-ios16.1/Syncfusion.Maui.Inputs.dll",
+        "lib/net9.0-ios16.1/Syncfusion.Maui.Inputs.xml",
+        "lib/net9.0-ios16.1/en-US/Syncfusion.Maui.Inputs.resources.dll",
+        "lib/net9.0-maccatalyst16.1/Syncfusion.Maui.Inputs.dll",
+        "lib/net9.0-maccatalyst16.1/Syncfusion.Maui.Inputs.xml",
+        "lib/net9.0-maccatalyst16.1/en-US/Syncfusion.Maui.Inputs.resources.dll",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.Inputs.deps.json",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.Inputs.dll",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.Inputs.xml",
+        "lib/net9.0-windows10.0.19041.0/en-US/Syncfusion.Maui.Inputs.resources.dll",
+        "lib/net9.0/Syncfusion.Maui.Inputs.deps.json",
+        "lib/net9.0/Syncfusion.Maui.Inputs.dll",
+        "lib/net9.0/Syncfusion.Maui.Inputs.xml",
+        "lib/net9.0/en-US/Syncfusion.Maui.Inputs.resources.dll",
+        "syncfusion.maui.inputs.27.2.2.nupkg.sha512",
+        "syncfusion.maui.inputs.nuspec",
+        "syncfusion_logo.png"
+      ]
+    },
+    "Syncfusion.Maui.ListView/27.2.2": {
+      "sha512": "HkaJv9YFvRDd6XFkAPEd91mH1Ynyw2hVpXAYvJdxR2CVn9JPxKeCZhKrOB/iF5OwU5TrEHl41852kf0qDajNQA==",
+      "type": "package",
+      "path": "syncfusion.maui.listview/27.2.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "README.md",
+        "lib/net8.0-android34.0/Syncfusion.Maui.ListView.dll",
+        "lib/net8.0-android34.0/Syncfusion.Maui.ListView.xml",
+        "lib/net8.0-ios16.1/Syncfusion.Maui.ListView.dll",
+        "lib/net8.0-ios16.1/Syncfusion.Maui.ListView.xml",
+        "lib/net8.0-maccatalyst16.1/Syncfusion.Maui.ListView.dll",
+        "lib/net8.0-maccatalyst16.1/Syncfusion.Maui.ListView.xml",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.ListView.deps.json",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.ListView.dll",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.ListView.xml",
+        "lib/net8.0/Syncfusion.Maui.ListView.deps.json",
+        "lib/net8.0/Syncfusion.Maui.ListView.dll",
+        "lib/net8.0/Syncfusion.Maui.ListView.xml",
+        "lib/net9.0-android34.0/Syncfusion.Maui.ListView.dll",
+        "lib/net9.0-android34.0/Syncfusion.Maui.ListView.xml",
+        "lib/net9.0-ios16.1/Syncfusion.Maui.ListView.dll",
+        "lib/net9.0-ios16.1/Syncfusion.Maui.ListView.xml",
+        "lib/net9.0-maccatalyst16.1/Syncfusion.Maui.ListView.dll",
+        "lib/net9.0-maccatalyst16.1/Syncfusion.Maui.ListView.xml",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.ListView.deps.json",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.ListView.dll",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.ListView.xml",
+        "lib/net9.0/Syncfusion.Maui.ListView.deps.json",
+        "lib/net9.0/Syncfusion.Maui.ListView.dll",
+        "lib/net9.0/Syncfusion.Maui.ListView.xml",
+        "syncfusion.maui.listview.27.2.2.nupkg.sha512",
+        "syncfusion.maui.listview.nuspec",
+        "syncfusion_logo.png"
+      ]
+    },
+    "Syncfusion.Maui.Popup/27.2.2": {
+      "sha512": "uc7gDgCHQ9HvFxPIjMVCMkuPBOjdnGysIAu74xGV2tFbI5NeALILFgWxzgW+YjpSPI+qiOcHGb9MXaJq/EpojA==",
+      "type": "package",
+      "path": "syncfusion.maui.popup/27.2.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "README.md",
+        "lib/net8.0-android34.0/Syncfusion.Maui.Popup.dll",
+        "lib/net8.0-android34.0/Syncfusion.Maui.Popup.xml",
+        "lib/net8.0-ios16.1/Syncfusion.Maui.Popup.dll",
+        "lib/net8.0-ios16.1/Syncfusion.Maui.Popup.xml",
+        "lib/net8.0-maccatalyst16.1/Syncfusion.Maui.Popup.dll",
+        "lib/net8.0-maccatalyst16.1/Syncfusion.Maui.Popup.xml",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.Popup.deps.json",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.Popup.dll",
+        "lib/net8.0-windows10.0.19041.0/Syncfusion.Maui.Popup.xml",
+        "lib/net8.0/Syncfusion.Maui.Popup.deps.json",
+        "lib/net8.0/Syncfusion.Maui.Popup.dll",
+        "lib/net8.0/Syncfusion.Maui.Popup.xml",
+        "lib/net9.0-android34.0/Syncfusion.Maui.Popup.dll",
+        "lib/net9.0-android34.0/Syncfusion.Maui.Popup.xml",
+        "lib/net9.0-ios16.1/Syncfusion.Maui.Popup.dll",
+        "lib/net9.0-ios16.1/Syncfusion.Maui.Popup.xml",
+        "lib/net9.0-maccatalyst16.1/Syncfusion.Maui.Popup.dll",
+        "lib/net9.0-maccatalyst16.1/Syncfusion.Maui.Popup.xml",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.Popup.deps.json",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.Popup.dll",
+        "lib/net9.0-windows10.0.19041.0/Syncfusion.Maui.Popup.xml",
+        "lib/net9.0/Syncfusion.Maui.Popup.deps.json",
+        "lib/net9.0/Syncfusion.Maui.Popup.dll",
+        "lib/net9.0/Syncfusion.Maui.Popup.xml",
+        "syncfusion.maui.popup.27.2.2.nupkg.sha512",
+        "syncfusion.maui.popup.nuspec",
+        "syncfusion_logo.png"
+      ]
+    },
     "Xamarin.Android.Glide/4.16.0.14": {
       "sha512": "zoo2thzoKv5SuY9PeB3Iaf41L7P4Z0jyPRMLUrb5u35KPHgWyQvj9hBablvtaFXuZIMMYyctwkHJwc4a4NPEKA==",
       "type": "package",
@@ -12605,7 +13304,11 @@
       "Microsoft.Extensions.Http >= 10.0.3",
       "Microsoft.Extensions.Logging.Debug >= 10.0.0",
       "Microsoft.Maui.Controls >= 10.0.30",
-      "Microsoft.NET.ILLink.Tasks >= 10.0.2"
+      "Microsoft.NET.ILLink.Tasks >= 10.0.2",
+      "Syncfusion.Maui.Calendar >= 27.2.2",
+      "Syncfusion.Maui.Core >= 27.2.2",
+      "Syncfusion.Maui.Inputs >= 27.2.2",
+      "Syncfusion.Maui.ListView >= 27.2.2"
     ]
   },
   "packageFolders": {
@@ -12686,6 +13389,22 @@
             "target": "Package",
             "version": "[10.0.2, )",
             "autoReferenced": true
+          },
+          "Syncfusion.Maui.Calendar": {
+            "target": "Package",
+            "version": "[27.2.2, )"
+          },
+          "Syncfusion.Maui.Core": {
+            "target": "Package",
+            "version": "[27.2.2, )"
+          },
+          "Syncfusion.Maui.Inputs": {
+            "target": "Package",
+            "version": "[27.2.2, )"
+          },
+          "Syncfusion.Maui.ListView": {
+            "target": "Package",
+            "version": "[27.2.2, )"
           }
         },
         "imports": [

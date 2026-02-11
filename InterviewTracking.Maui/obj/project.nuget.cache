@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "f38VzN7D+pU=",
+  "dgSpecHash": "gt08yYI0cME=",
   "success": true,
   "projectFilePath": "/home/runner/work/InterviewTracking/InterviewTracking/InterviewTracking.Maui/InterviewTracking.Maui.csproj",
   "expectedPackageFiles": [
@@ -47,6 +47,14 @@
     "/home/runner/.nuget/packages/sqlitepclraw.core/2.1.11/sqlitepclraw.core.2.1.11.nupkg.sha512",
     "/home/runner/.nuget/packages/sqlitepclraw.lib.e_sqlite3.android/2.1.11/sqlitepclraw.lib.e_sqlite3.android.2.1.11.nupkg.sha512",
     "/home/runner/.nuget/packages/sqlitepclraw.provider.e_sqlite3/2.1.11/sqlitepclraw.provider.e_sqlite3.2.1.11.nupkg.sha512",
+    "/home/runner/.nuget/packages/syncfusion.licensing/27.2.2/syncfusion.licensing.27.2.2.nupkg.sha512",
+    "/home/runner/.nuget/packages/syncfusion.maui.calendar/27.2.2/syncfusion.maui.calendar.27.2.2.nupkg.sha512",
+    "/home/runner/.nuget/packages/syncfusion.maui.core/27.2.2/syncfusion.maui.core.27.2.2.nupkg.sha512",
+    "/home/runner/.nuget/packages/syncfusion.maui.datasource/27.2.2/syncfusion.maui.datasource.27.2.2.nupkg.sha512",
+    "/home/runner/.nuget/packages/syncfusion.maui.gridcommon/27.2.2/syncfusion.maui.gridcommon.27.2.2.nupkg.sha512",
+    "/home/runner/.nuget/packages/syncfusion.maui.inputs/27.2.2/syncfusion.maui.inputs.27.2.2.nupkg.sha512",
+    "/home/runner/.nuget/packages/syncfusion.maui.listview/27.2.2/syncfusion.maui.listview.27.2.2.nupkg.sha512",
+    "/home/runner/.nuget/packages/syncfusion.maui.popup/27.2.2/syncfusion.maui.popup.27.2.2.nupkg.sha512",
     "/home/runner/.nuget/packages/xamarin.android.glide/4.16.0.14/xamarin.android.glide.4.16.0.14.nupkg.sha512",
     "/home/runner/.nuget/packages/xamarin.android.glide.annotations/4.16.0.14/xamarin.android.glide.annotations.4.16.0.14.nupkg.sha512",
     "/home/runner/.nuget/packages/xamarin.android.glide.disklrucache/4.16.0.14/xamarin.android.glide.disklrucache.4.16.0.14.nupkg.sha512",

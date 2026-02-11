@@ -6,7 +6,18 @@ public class Interview
     public string Title { get; set; } = string.Empty;
     public DateTime DateTime { get; set; }
     public string Notes { get; set; } = string.Empty;
-    public MeetingPlatform Platform { get; set; }
+    
+    // Meeting platform relationship
+    public int MeetingPlatformTypeId { get; set; }
+    public MeetingPlatformType? MeetingPlatformType { get; set; }
+    
+    // Convenience property for backward compatibility
+    public MeetingPlatform Platform 
+    { 
+        get => MeetingPlatformType?.PlatformType ?? MeetingPlatform.Other;
+        set { } // Setter for serialization compatibility
+    }
+    
     public string MeetingLink { get; set; } = string.Empty;
     public string UserId { get; set; } = string.Empty;
     

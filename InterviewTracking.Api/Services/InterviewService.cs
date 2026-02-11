@@ -19,6 +19,7 @@ public class InterviewService : IInterviewService
             .Where(i => i.UserId == userId)
             .Include(i => i.Interviewers)
             .Include(i => i.Reminders)
+            .Include(i => i.MeetingPlatformType)
             .OrderBy(i => i.DateTime)
             .ToListAsync();
     }
@@ -28,6 +29,7 @@ public class InterviewService : IInterviewService
         return await _context.Interviews
             .Include(i => i.Interviewers)
             .Include(i => i.Reminders)
+            .Include(i => i.MeetingPlatformType)
             .FirstOrDefaultAsync(i => i.Id == id && i.UserId == userId);
     }
 
@@ -37,6 +39,12 @@ public class InterviewService : IInterviewService
         interview.CreatedAt = DateTime.UtcNow;
         interview.UpdatedAt = DateTime.UtcNow;
         interview.IsSynced = true;
+
+        // Ensure MeetingPlatformTypeId is set if not provided
+        if (interview.MeetingPlatformTypeId == 0)
+        {
+            interview.MeetingPlatformTypeId = 1; // Default to Zoom
+        }
 
         _context.Interviews.Add(interview);
         await _context.SaveChangesAsync();
@@ -49,6 +57,7 @@ public class InterviewService : IInterviewService
         var existingInterview = await _context.Interviews
             .Include(i => i.Interviewers)
             .Include(i => i.Reminders)
+            .Include(i => i.MeetingPlatformType)
             .FirstOrDefaultAsync(i => i.Id == interview.Id && i.UserId == userId);
 
         if (existingInterview == null)
@@ -57,7 +66,7 @@ public class InterviewService : IInterviewService
         existingInterview.Title = interview.Title;
         existingInterview.DateTime = interview.DateTime;
         existingInterview.Notes = interview.Notes;
-        existingInterview.Platform = interview.Platform;
+        existingInterview.MeetingPlatformTypeId = interview.MeetingPlatformTypeId;
         existingInterview.MeetingLink = interview.MeetingLink;
         existingInterview.IsRecurring = interview.IsRecurring;
         existingInterview.RecurrencePattern = interview.RecurrencePattern;

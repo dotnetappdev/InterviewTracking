@@ -24,6 +24,7 @@ public class InterviewLocalService : IInterviewLocalService
         return await _context.Interviews
             .Include(i => i.Interviewers)
             .Include(i => i.Reminders)
+            .Include(i => i.MeetingPlatformType)
             .OrderBy(i => i.DateTime)
             .ToListAsync();
     }
@@ -33,6 +34,7 @@ public class InterviewLocalService : IInterviewLocalService
         return await _context.Interviews
             .Include(i => i.Interviewers)
             .Include(i => i.Reminders)
+            .Include(i => i.MeetingPlatformType)
             .FirstOrDefaultAsync(i => i.Id == id);
     }
 
@@ -42,6 +44,12 @@ public class InterviewLocalService : IInterviewLocalService
         interview.CreatedAt = DateTime.UtcNow;
         interview.UpdatedAt = DateTime.UtcNow;
         interview.IsSynced = false;
+
+        // Ensure MeetingPlatformTypeId is set if not provided
+        if (interview.MeetingPlatformTypeId == 0)
+        {
+            interview.MeetingPlatformTypeId = 1; // Default to Zoom
+        }
 
         _context.Interviews.Add(interview);
         await _context.SaveChangesAsync();
@@ -54,6 +62,7 @@ public class InterviewLocalService : IInterviewLocalService
         var existingInterview = await _context.Interviews
             .Include(i => i.Interviewers)
             .Include(i => i.Reminders)
+            .Include(i => i.MeetingPlatformType)
             .FirstOrDefaultAsync(i => i.Id == interview.Id);
 
         if (existingInterview == null)
@@ -62,7 +71,7 @@ public class InterviewLocalService : IInterviewLocalService
         existingInterview.Title = interview.Title;
         existingInterview.DateTime = interview.DateTime;
         existingInterview.Notes = interview.Notes;
-        existingInterview.Platform = interview.Platform;
+        existingInterview.MeetingPlatformTypeId = interview.MeetingPlatformTypeId;
         existingInterview.MeetingLink = interview.MeetingLink;
         existingInterview.IsRecurring = interview.IsRecurring;
         existingInterview.RecurrencePattern = interview.RecurrencePattern;
@@ -101,6 +110,7 @@ public class InterviewLocalService : IInterviewLocalService
         return await _context.Interviews
             .Include(i => i.Interviewers)
             .Include(i => i.Reminders)
+            .Include(i => i.MeetingPlatformType)
             .Where(i => i.DateTime >= now)
             .OrderBy(i => i.DateTime)
             .ToListAsync();

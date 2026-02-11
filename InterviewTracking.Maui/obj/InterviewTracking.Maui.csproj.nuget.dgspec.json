@@ -79,6 +79,22 @@
               "target": "Package",
               "version": "[10.0.2, )",
               "autoReferenced": true
+            },
+            "Syncfusion.Maui.Calendar": {
+              "target": "Package",
+              "version": "[27.2.2, )"
+            },
+            "Syncfusion.Maui.Core": {
+              "target": "Package",
+              "version": "[27.2.2, )"
+            },
+            "Syncfusion.Maui.Inputs": {
+              "target": "Package",
+              "version": "[27.2.2, )"
+            },
+            "Syncfusion.Maui.ListView": {
+              "target": "Package",
+              "version": "[27.2.2, )"
             }
           },
           "imports": [
