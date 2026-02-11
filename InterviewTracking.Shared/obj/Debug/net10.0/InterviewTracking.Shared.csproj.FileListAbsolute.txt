@@ -1,0 +1,12 @@
+/home/runner/work/InterviewTracking/InterviewTracking/InterviewTracking.Shared/bin/Debug/net10.0/InterviewTracking.Shared.deps.json
+/home/runner/work/InterviewTracking/InterviewTracking/InterviewTracking.Shared/bin/Debug/net10.0/InterviewTracking.Shared.dll
+/home/runner/work/InterviewTracking/InterviewTracking/InterviewTracking.Shared/bin/Debug/net10.0/InterviewTracking.Shared.pdb
+/home/runner/work/InterviewTracking/InterviewTracking/InterviewTracking.Shared/obj/Debug/net10.0/InterviewTracking.Shared.GeneratedMSBuildEditorConfig.editorconfig
+/home/runner/work/InterviewTracking/InterviewTracking/InterviewTracking.Shared/obj/Debug/net10.0/InterviewTracking.Shared.AssemblyInfoInputs.cache
+/home/runner/work/InterviewTracking/InterviewTracking/InterviewTracking.Shared/obj/Debug/net10.0/InterviewTracking.Shared.AssemblyInfo.cs
+/home/runner/work/InterviewTracking/InterviewTracking/InterviewTracking.Shared/obj/Debug/net10.0/InterviewTracking.Shared.csproj.CoreCompileInputs.cache
+/home/runner/work/InterviewTracking/InterviewTracking/InterviewTracking.Shared/obj/Debug/net10.0/InterviewTracking.Shared.sourcelink.json
+/home/runner/work/InterviewTracking/InterviewTracking/InterviewTracking.Shared/obj/Debug/net10.0/InterviewTracking.Shared.dll
+/home/runner/work/InterviewTracking/InterviewTracking/InterviewTracking.Shared/obj/Debug/net10.0/refint/InterviewTracking.Shared.dll
+/home/runner/work/InterviewTracking/InterviewTracking/InterviewTracking.Shared/obj/Debug/net10.0/InterviewTracking.Shared.pdb
+/home/runner/work/InterviewTracking/InterviewTracking/InterviewTracking.Shared/obj/Debug/net10.0/ref/InterviewTracking.Shared.dll
