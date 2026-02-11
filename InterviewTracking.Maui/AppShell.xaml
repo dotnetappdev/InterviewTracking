@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="InterviewTracking.Maui.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:InterviewTracking.Maui.Views"
+    Title="Interview Tracker">
+
+    <TabBar>
+        <ShellContent
+            Title="Interviews"
+            Icon="calendar"
+            ContentTemplate="{DataTemplate views:InterviewListPage}"
+            Route="InterviewList" />
+
+        <ShellContent
+            Title="Settings"
+            Icon="settings"
+            ContentTemplate="{DataTemplate views:SettingsPage}"
+            Route="Settings" />
+    </TabBar>
+
+    <!-- Auth Pages -->
+    <ShellContent
+        Title="Login"
+        ContentTemplate="{DataTemplate views:LoginPage}"
+        Route="Login" />
+    
+    <ShellContent
+        Title="Register"
+        ContentTemplate="{DataTemplate views:RegisterPage}"
+        Route="Register" />
+
+</Shell>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:InterviewTracking.Maui.ViewModels"
+             xmlns:model="clr-namespace:InterviewTracking.Shared.Models;assembly=InterviewTracking.Shared"
+             xmlns:calendar="clr-namespace:Syncfusion.Maui.Calendar;assembly=Syncfusion.Maui.Calendar"
+             x:Class="InterviewTracking.Maui.Views.InterviewListPage"
+             x:DataType="vm:InterviewListViewModel"
+             Title="{Binding Title}">
+    
+    <Grid RowDefinitions="Auto,Auto,Auto,*">
+        <!-- Action Buttons -->
+        <HorizontalStackLayout Grid.Row="0" Padding="10" Spacing="10">
+            <Button Text="Add Interview" Command="{Binding NavigateToAddInterviewCommand}" HorizontalOptions="FillAndExpand"/>
+            <Button Text="Sync" Command="{Binding SyncInterviewsCommand}"/>
+            <Button Text="Companies A-Z" Clicked="OnShowCompaniesAZClicked"/>
+        </HorizontalStackLayout>
+
+        <!-- Search Bar -->
+        <Frame Grid.Row="1" Margin="10,5" Padding="5" BorderColor="Gray" CornerRadius="10" HasShadow="False">
+            <HorizontalStackLayout Spacing="5">
+                <Entry Placeholder="Search by company name..." 
+                       Text="{Binding SearchText}"
+                       HorizontalOptions="FillAndExpand"
+                       TextChanged="OnSearchTextChanged"/>
+                <Button Text="🔍" 
+                        Command="{Binding SearchCompanyCommand}"
+                        FontSize="18"
+                        Padding="10,5"/>
+                <Button Text="✖" 
+                        Command="{Binding ClearSearchCommand}"
+                        FontSize="14"
+                        Padding="10,5"
+                        IsVisible="{Binding IsSearchMode}"/>
+            </HorizontalStackLayout>
+        </Frame>
+
+        <!-- Calendar View -->
+        <Frame Grid.Row="2" Margin="10,0,10,10" Padding="5" BorderColor="Gray" CornerRadius="10" HasShadow="False" IsVisible="{Binding IsSearchMode, Converter={StaticResource InvertedBoolConverter}}">
+            <calendar:SfCalendar x:Name="calendar"
+                                View="Month"
+                                SelectionMode="Single"
+                                SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
+                                SelectionChanged="OnCalendarSelectionChanged"
+                                HeightRequest="320"/>
+        </Frame>
+
+        <!-- Interview List -->
+        <RefreshView Grid.Row="3"
+                     IsRefreshing="{Binding IsRefreshing}"
+                     Command="{Binding LoadInterviewsCommand}">
+            <ScrollView>
+                <VerticalStackLayout>
+                    <!-- Section Header -->
+                    <Label Text="{Binding InterviewListTitle}"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           Margin="15,10,15,5"/>
+                    
+                    <!-- Interview List -->
+                    <CollectionView ItemsSource="{Binding FilteredInterviews}"
+                                  SelectionMode="None">
+                        <CollectionView.EmptyView>
+                            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="20">
+                                <Label Text="No interviews scheduled"
+                                       FontSize="18"
+                                       HorizontalOptions="Center"/>
+                                <Label Text="Tap 'Add Interview' to get started"
+                                       HorizontalOptions="Center"
+                                       Margin="0,10,0,0"/>
+                            </VerticalStackLayout>
+                        </CollectionView.EmptyView>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Interview">
+                                <Frame Margin="10,5" Padding="10" BorderColor="Gray" CornerRadius="10">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:InterviewListViewModel}}, Path=NavigateToInterviewDetailCommand}"
+                                                            CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+                                    
+                                    <Grid ColumnDefinitions="*,Auto,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                                        <Label Grid.Row="0" Grid.Column="0"
+                                               Text="{Binding Title}"
+                                               FontSize="18"
+                                               FontAttributes="Bold"/>
+                                        
+                                        <Label Grid.Row="1" Grid.Column="0"
+                                               Text="{Binding DateTime, StringFormat='{0:MMM dd, yyyy - hh:mm tt}'}"/>
+                                        
+                                        <Label Grid.Row="2" Grid.Column="0"
+                                               Text="{Binding Status, Converter={StaticResource InterviewStatusToStringConverter}, StringFormat='Status: {0}'}"
+                                               FontSize="12"
+                                               TextColor="{AppThemeBinding Light=DarkBlue, Dark=LightBlue}"/>
+                                        
+                                        <Label Grid.Row="3" Grid.Column="0"
+                                               Text="{Binding JobSource.Name, StringFormat='Source: {0}'}"
+                                               FontSize="12"
+                                               IsVisible="{Binding JobSource, Converter={StaticResource StringIsNotNullOrEmptyConverter}}"/>
+                                        
+                                        <Label Grid.Row="4" Grid.Column="0"
+                                               Text="{Binding Platform, StringFormat='Platform: {0}'}"/>
+
+                                        <!-- Job Portal Credentials -->
+                                        <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"
+                                              IsVisible="{Binding JobPortalUrl, Converter={StaticResource StringIsNotNullOrEmptyConverter}}"
+                                              Margin="0,10,0,0">
+                                            <Frame BorderColor="{AppThemeBinding Light=LightGray, Dark=Gray}" 
+                                                   Padding="8" 
+                                                   CornerRadius="5"
+                                                   HasShadow="False"
+                                                   BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark=#2C2C2C}">
+                                                <VerticalStackLayout Spacing="5">
+                                                    <Label Text="Job Portal Credentials" 
+                                                           FontAttributes="Bold" 
+                                                           FontSize="12"/>
+                                                    
+                                                    <!-- URL -->
+                                                    <HorizontalStackLayout Spacing="5" 
+                                                                          IsVisible="{Binding JobPortalUrl, Converter={StaticResource StringIsNotNullOrEmptyConverter}}">
+                                                        <Label Text="URL:" FontSize="12" VerticalOptions="Center"/>
+                                                        <Label Text="{Binding JobPortalUrl}" 
+                                                               FontSize="12" 
+                                                               LineBreakMode="TailTruncation"
+                                                               HorizontalOptions="FillAndExpand"
+                                                               VerticalOptions="Center"/>
+                                                        <Button Text="📋" 
+                                                                FontSize="14"
+                                                                Padding="5,2"
+                                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:InterviewListViewModel}}, Path=CopyToClipboardCommand}"
+                                                                CommandParameter="{Binding JobPortalUrl}"/>
+                                                    </HorizontalStackLayout>
+                                                    
+                                                    <!-- Username -->
+                                                    <HorizontalStackLayout Spacing="5"
+                                                                          IsVisible="{Binding JobPortalUsername, Converter={StaticResource StringIsNotNullOrEmptyConverter}}">
+                                                        <Label Text="Username:" FontSize="12" VerticalOptions="Center"/>
+                                                        <Label Text="{Binding JobPortalUsername}" 
+                                                               FontSize="12"
+                                                               HorizontalOptions="FillAndExpand"
+                                                               VerticalOptions="Center"/>
+                                                        <Button Text="📋" 
+                                                                FontSize="14"
+                                                                Padding="5,2"
+                                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:InterviewListViewModel}}, Path=CopyToClipboardCommand}"
+                                                                CommandParameter="{Binding JobPortalUsername}"/>
+                                                    </HorizontalStackLayout>
+                                                    
+                                                    <!-- Password -->
+                                                    <HorizontalStackLayout Spacing="5"
+                                                                          IsVisible="{Binding JobPortalPassword, Converter={StaticResource StringIsNotNullOrEmptyConverter}}">
+                                                        <Label Text="Password:" FontSize="12" VerticalOptions="Center"/>
+                                                        <Label Text="••••••••" 
+                                                               FontSize="12"
+                                                               HorizontalOptions="FillAndExpand"
+                                                               VerticalOptions="Center"/>
+                                                        <Button Text="📋" 
+                                                                FontSize="14"
+                                                                Padding="5,2"
+                                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:InterviewListViewModel}}, Path=CopyToClipboardCommand}"
+                                                                CommandParameter="{Binding JobPortalPassword}"/>
+                                                    </HorizontalStackLayout>
+                                                </VerticalStackLayout>
+                                            </Frame>
+                                        </Grid>
+
+                                        <Button Grid.Row="0" Grid.Column="1" Grid.RowSpan="5"
+                                                Text="📅"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:InterviewListViewModel}}, Path=ExportToCalendarCommand}"
+                                                CommandParameter="{Binding .}"
+                                                VerticalOptions="Center"
+                                                Margin="5,0"/>
+
+                                        <Button Grid.Row="0" Grid.Column="2" Grid.RowSpan="5"
+                                                Text="Join"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:InterviewListViewModel}}, Path=OpenMeetingLinkCommand}"
+                                                CommandParameter="{Binding .}"
+                                                IsVisible="{Binding MeetingLink, Converter={StaticResource StringIsNotNullOrEmptyConverter}}"
+                                                VerticalOptions="Center"/>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </ScrollView>
+        </RefreshView>
+    </Grid>
+</ContentPage>
