@@ -8,15 +8,35 @@
              x:DataType="vm:InterviewListViewModel"
              Title="{Binding Title}">
     
-    <Grid RowDefinitions="Auto,Auto,*">
+    <Grid RowDefinitions="Auto,Auto,Auto,*">
         <!-- Action Buttons -->
         <HorizontalStackLayout Grid.Row="0" Padding="10" Spacing="10">
             <Button Text="Add Interview" Command="{Binding NavigateToAddInterviewCommand}" HorizontalOptions="FillAndExpand"/>
             <Button Text="Sync" Command="{Binding SyncInterviewsCommand}"/>
+            <Button Text="Companies A-Z" Clicked="OnShowCompaniesAZClicked"/>
         </HorizontalStackLayout>
 
+        <!-- Search Bar -->
+        <Frame Grid.Row="1" Margin="10,5" Padding="5" BorderColor="Gray" CornerRadius="10" HasShadow="False">
+            <HorizontalStackLayout Spacing="5">
+                <Entry Placeholder="Search by company name..." 
+                       Text="{Binding SearchText}"
+                       HorizontalOptions="FillAndExpand"
+                       TextChanged="OnSearchTextChanged"/>
+                <Button Text="🔍" 
+                        Command="{Binding SearchCompanyCommand}"
+                        FontSize="18"
+                        Padding="10,5"/>
+                <Button Text="✖" 
+                        Command="{Binding ClearSearchCommand}"
+                        FontSize="14"
+                        Padding="10,5"
+                        IsVisible="{Binding IsSearchMode}"/>
+            </HorizontalStackLayout>
+        </Frame>
+
         <!-- Calendar View -->
-        <Frame Grid.Row="1" Margin="10,0,10,10" Padding="5" BorderColor="Gray" CornerRadius="10" HasShadow="False">
+        <Frame Grid.Row="2" Margin="10,0,10,10" Padding="5" BorderColor="Gray" CornerRadius="10" HasShadow="False" IsVisible="{Binding IsSearchMode, Converter={StaticResource InvertedBoolConverter}}">
             <calendar:SfCalendar x:Name="calendar"
                                 View="Month"
                                 SelectionMode="Single"
@@ -26,7 +46,7 @@
         </Frame>
 
         <!-- Interview List -->
-        <RefreshView Grid.Row="2"
+        <RefreshView Grid.Row="3"
                      IsRefreshing="{Binding IsRefreshing}"
                      Command="{Binding LoadInterviewsCommand}">
             <ScrollView>

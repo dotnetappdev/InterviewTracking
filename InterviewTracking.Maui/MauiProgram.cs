@@ -56,6 +56,7 @@ public static class MauiProgram
 		builder.Services.AddTransient<InterviewDetailPage>();
 		builder.Services.AddTransient<AddEditInterviewPage>();
 		builder.Services.AddTransient<SettingsPage>();
+		builder.Services.AddTransient<CompaniesAZPage>();
 
 #if DEBUG
 		builder.Logging.AddDebug();

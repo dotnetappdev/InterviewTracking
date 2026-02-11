@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InterviewTracking.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e1d01cb371afdd29027112763197f8c5395cb109")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+95519019de99bc3df46a7e6191552164f4cc77ef")]
 [assembly: System.Reflection.AssemblyProductAttribute("InterviewTracking.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InterviewTracking.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

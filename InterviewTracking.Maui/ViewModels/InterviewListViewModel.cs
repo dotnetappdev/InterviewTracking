@@ -30,6 +30,15 @@ public partial class InterviewListViewModel : BaseViewModel
     [ObservableProperty]
     private bool isRefreshing;
 
+    [ObservableProperty]
+    private string searchText = string.Empty;
+
+    [ObservableProperty]
+    private ObservableCollection<CompanyGroup> companiesGroupedAZ = new();
+
+    [ObservableProperty]
+    private bool isSearchMode = false;
+
     public InterviewListViewModel(
         IInterviewLocalService interviewService, 
         ISyncService syncService,
@@ -241,4 +250,129 @@ public partial class InterviewListViewModel : BaseViewModel
     {
         await LoadInterviewsAsync();
     }
+
+    [RelayCommand]
+    private void SearchCompany()
+    {
+        if (string.IsNullOrWhiteSpace(SearchText))
+        {
+            // Reset to filtered interviews
+            IsSearchMode = false;
+            return;
+        }
+
+        IsSearchMode = true;
+        FilteredInterviews.Clear();
+
+        var searchResults = UpcomingInterviews
+            .Where(i => !string.IsNullOrEmpty(i.CompanyName) && 
+                        i.CompanyName.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
+            .OrderBy(i => i.CompanyName)
+            .ThenBy(i => i.DateTime)
+            .ToList();
+
+        foreach (var interview in searchResults)
+        {
+            FilteredInterviews.Add(interview);
+        }
+
+        InterviewListTitle = searchResults.Any() 
+            ? $"Search Results ({searchResults.Count})"
+            : "No Results Found";
+    }
+
+    [RelayCommand]
+    private void ClearSearch()
+    {
+        SearchText = string.Empty;
+        IsSearchMode = false;
+        
+        // Reset to all upcoming interviews
+        FilteredInterviews.Clear();
+        foreach (var interview in UpcomingInterviews)
+        {
+            FilteredInterviews.Add(interview);
+        }
+        InterviewListTitle = "All Upcoming Interviews";
+    }
+
+    [RelayCommand]
+    private void LoadCompaniesAZ()
+    {
+        CompaniesGroupedAZ.Clear();
+
+        // Get distinct companies from all interviews
+        var companies = Interviews
+            .Where(i => !string.IsNullOrEmpty(i.CompanyName))
+            .Select(i => i.CompanyName)
+            .Distinct()
+            .OrderBy(c => c)
+            .ToList();
+
+        // Group by first letter
+        var grouped = companies
+            .GroupBy(c => char.ToUpper(c[0]))
+            .OrderBy(g => g.Key);
+
+        foreach (var group in grouped)
+        {
+            var companyGroup = new CompanyGroup(group.Key.ToString());
+            
+            foreach (var companyName in group)
+            {
+                var companyInterviews = Interviews
+                    .Where(i => i.CompanyName == companyName)
+                    .OrderBy(i => i.DateTime)
+                    .ToList();
+
+                companyGroup.Add(new CompanyItem
+                {
+                    CompanyName = companyName,
+                    InterviewCount = companyInterviews.Count,
+                    Interviews = companyInterviews
+                });
+            }
+
+            CompaniesGroupedAZ.Add(companyGroup);
+        }
+    }
+
+    [RelayCommand]
+    private void FilterByCompany(string companyName)
+    {
+        if (string.IsNullOrWhiteSpace(companyName)) return;
+
+        IsSearchMode = true;
+        FilteredInterviews.Clear();
+
+        var companyInterviews = UpcomingInterviews
+            .Where(i => i.CompanyName == companyName)
+            .OrderBy(i => i.DateTime)
+            .ToList();
+
+        foreach (var interview in companyInterviews)
+        {
+            FilteredInterviews.Add(interview);
+        }
+
+        InterviewListTitle = $"{companyName} ({companyInterviews.Count})";
+    }
+}
+
+// Helper classes for company grouping
+public class CompanyGroup : ObservableCollection<CompanyItem>
+{
+    public string Letter { get; set; }
+
+    public CompanyGroup(string letter)
+    {
+        Letter = letter;
+    }
+}
+
+public class CompanyItem
+{
+    public string CompanyName { get; set; } = string.Empty;
+    public int InterviewCount { get; set; }
+    public List<Interview> Interviews { get; set; } = new();
 }

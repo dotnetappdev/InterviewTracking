@@ -152,6 +152,88 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         // Ignore the Platform computed property for EF Core
         builder.Entity<Interview>()
             .Ignore(i => i.Platform);
+
+        // Seed sample interviews
+        builder.Entity<Interview>().HasData(
+            new Interview
+            {
+                Id = Guid.Parse("11111111-1111-1111-1111-111111111111"),
+                Title = "Senior Software Engineer Interview",
+                CompanyName = "Acme Corporation",
+                JobTitle = "Senior Software Engineer",
+                DateTime = DateTime.UtcNow.AddDays(5),
+                MeetingLink = "https://zoom.us/j/123456789",
+                Notes = "Technical interview focused on system design and algorithms",
+                MeetingPlatformTypeId = 1, // Zoom
+                JobSourceId = 1, // LinkedIn
+                Status = InterviewStatus.Scheduled,
+                JobPortalUrl = "https://linkedin.com/jobs/12345",
+                JobPortalUsername = "user@example.com",
+                JobPortalPassword = "password123",
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            },
+            new Interview
+            {
+                Id = Guid.Parse("22222222-2222-2222-2222-222222222222"),
+                Title = "Product Manager Interview",
+                CompanyName = "Beta Technologies",
+                JobTitle = "Product Manager",
+                DateTime = DateTime.UtcNow.AddDays(7),
+                MeetingLink = "https://meet.google.com/abc-defg-hij",
+                Notes = "Behavioral and product strategy interview",
+                MeetingPlatformTypeId = 2, // Google Meet
+                JobSourceId = 2, // Indeed
+                Status = InterviewStatus.Stage1,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            },
+            new Interview
+            {
+                Id = Guid.Parse("33333333-3333-3333-3333-333333333333"),
+                Title = "DevOps Engineer Interview",
+                CompanyName = "Cloud Innovations Inc",
+                JobTitle = "DevOps Engineer",
+                DateTime = DateTime.UtcNow.AddDays(10),
+                MeetingLink = "https://teams.microsoft.com/l/meetup-join/...",
+                Notes = "Cloud architecture and CI/CD pipeline discussion",
+                MeetingPlatformTypeId = 3, // Microsoft Teams
+                JobSourceId = 3, // Glassdoor
+                Status = InterviewStatus.Stage2,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            },
+            new Interview
+            {
+                Id = Guid.Parse("44444444-4444-4444-4444-444444444444"),
+                Title = "Data Scientist Interview",
+                CompanyName = "DataViz Analytics",
+                JobTitle = "Data Scientist",
+                DateTime = DateTime.UtcNow.AddDays(12),
+                MeetingLink = "https://zoom.us/j/987654321",
+                Notes = "Machine learning and statistical modeling interview",
+                MeetingPlatformTypeId = 1, // Zoom
+                JobSourceId = 4, // Company Website
+                Status = InterviewStatus.FinalRound,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            },
+            new Interview
+            {
+                Id = Guid.Parse("55555555-5555-5555-5555-555555555555"),
+                Title = "UX Designer Interview",
+                CompanyName = "Design Studios Ltd",
+                JobTitle = "UX Designer",
+                DateTime = DateTime.UtcNow.AddDays(15),
+                MeetingLink = "https://meet.google.com/xyz-abcd-efg",
+                Notes = "Portfolio review and design process discussion",
+                MeetingPlatformTypeId = 2, // Google Meet
+                JobSourceId = 5, // Referral
+                Status = InterviewStatus.Scheduled,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            }
+        );
     }
 }
 

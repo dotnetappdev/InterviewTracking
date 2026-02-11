@@ -27,4 +27,18 @@ public partial class InterviewListPage : ContentPage
             _viewModel.FilterInterviewsByDate(dateTime);
         }
     }
+
+    private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
+    {
+        // Auto-search as user types
+        if (string.IsNullOrWhiteSpace(e.NewTextValue))
+        {
+            _viewModel.ClearSearchCommand.Execute(null);
+        }
+    }
+
+    private async void OnShowCompaniesAZClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new CompaniesAZPage(_viewModel));
+    }
 }
