@@ -82,6 +82,7 @@
     <Import Project="$(NuGetPackageRoot)microsoft.extensions.logging.abstractions/10.0.3/buildTransitive/net8.0/Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.logging.abstractions/10.0.3/buildTransitive/net8.0/Microsoft.Extensions.Logging.Abstractions.targets')" />
     <Import Project="$(NuGetPackageRoot)microsoft.maui.core/10.0.30/buildTransitive/Microsoft.Maui.Core.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.maui.core/10.0.30/buildTransitive/Microsoft.Maui.Core.targets')" />
     <Import Project="$(NuGetPackageRoot)microsoft.maui.controls.build.tasks/10.0.30/buildTransitive/netstandard2.0/Microsoft.Maui.Controls.Build.Tasks.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.maui.controls.build.tasks/10.0.30/buildTransitive/netstandard2.0/Microsoft.Maui.Controls.Build.Tasks.targets')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.extensions.configuration.binder/10.0.3/buildTransitive/netstandard2.0/Microsoft.Extensions.Configuration.Binder.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.configuration.binder/10.0.3/buildTransitive/netstandard2.0/Microsoft.Extensions.Configuration.Binder.targets')" />
     <Import Project="$(NuGetPackageRoot)communitytoolkit.mvvm/8.4.0/buildTransitive/CommunityToolkit.Mvvm.targets" Condition="Exists('$(NuGetPackageRoot)communitytoolkit.mvvm/8.4.0/buildTransitive/CommunityToolkit.Mvvm.targets')" />
   </ImportGroup>
 </Project>

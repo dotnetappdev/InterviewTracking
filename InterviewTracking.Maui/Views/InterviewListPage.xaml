@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:InterviewTracking.Maui.ViewModels"
+             xmlns:model="clr-namespace:InterviewTracking.Shared.Models;assembly=InterviewTracking.Shared"
+             x:Class="InterviewTracking.Maui.Views.InterviewListPage"
+             x:DataType="vm:InterviewListViewModel"
+             Title="{Binding Title}">
+    
+    <Grid RowDefinitions="Auto,*">
+        <HorizontalStackLayout Grid.Row="0" Padding="10" Spacing="10">
+            <Button Text="Add Interview" Command="{Binding NavigateToAddInterviewCommand}" HorizontalOptions="FillAndExpand"/>
+            <Button Text="Sync" Command="{Binding SyncInterviewsCommand}"/>
+        </HorizontalStackLayout>
+
+        <RefreshView Grid.Row="1"
+                     IsRefreshing="{Binding IsRefreshing}"
+                     Command="{Binding LoadInterviewsCommand}">
+            <CollectionView ItemsSource="{Binding UpcomingInterviews}"
+                          SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                        <Label Text="No interviews scheduled"
+                               FontSize="18"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Tap 'Add Interview' to get started"
+                               HorizontalOptions="Center"
+                               Margin="0,10,0,0"/>
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Interview">
+                        <Frame Margin="10,5" Padding="10" BorderColor="Gray" CornerRadius="10">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:InterviewListViewModel}}, Path=NavigateToInterviewDetailCommand}"
+                                                    CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+                            
+                            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto,Auto">
+                                <Label Grid.Row="0" Grid.Column="0"
+                                       Text="{Binding Title}"
+                                       FontSize="18"
+                                       FontAttributes="Bold"/>
+                                
+                                <Label Grid.Row="1" Grid.Column="0"
+                                       Text="{Binding DateTime, StringFormat='{0:MMM dd, yyyy - hh:mm tt}'}"/>
+                                
+                                <Label Grid.Row="2" Grid.Column="0"
+                                       Text="{Binding Platform, StringFormat='Platform: {0}'}"/>
+
+                                <Button Grid.Row="0" Grid.Column="1" Grid.RowSpan="3"
+                                        Text="Join"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:InterviewListViewModel}}, Path=OpenMeetingLinkCommand}"
+                                        CommandParameter="{Binding .}"
+                                        IsVisible="{Binding MeetingLink, Converter={StaticResource StringIsNotNullOrEmptyConverter}}"
+                                        VerticalOptions="Center"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>
