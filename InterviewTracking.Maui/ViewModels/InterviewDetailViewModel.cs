@@ -9,6 +9,7 @@ namespace InterviewTracking.Maui.ViewModels;
 public partial class InterviewDetailViewModel : BaseViewModel
 {
     private readonly IInterviewLocalService _interviewService;
+    private readonly ICalendarExportService _calendarExportService;
 
     [ObservableProperty]
     private Interview? interview;
@@ -16,9 +17,12 @@ public partial class InterviewDetailViewModel : BaseViewModel
     [ObservableProperty]
     private string interviewId = string.Empty;
 
-    public InterviewDetailViewModel(IInterviewLocalService interviewService)
+    public InterviewDetailViewModel(
+        IInterviewLocalService interviewService,
+        ICalendarExportService calendarExportService)
     {
         _interviewService = interviewService;
+        _calendarExportService = calendarExportService;
         Title = "Interview Details";
     }
 
@@ -100,6 +104,30 @@ public partial class InterviewDetailViewModel : BaseViewModel
         catch (Exception ex)
         {
             await Shell.Current.DisplayAlert("Error", $"Failed to open meeting link: {ex.Message}", "OK");
+        }
+    }
+
+    [RelayCommand]
+    private async Task ExportToCalendarAsync()
+    {
+        if (Interview == null) return;
+
+        try
+        {
+            var success = await _calendarExportService.ExportToDeviceCalendarAsync(Interview);
+            
+            if (success)
+            {
+                await Shell.Current.DisplayAlertAsync("Success", "Interview exported to calendar", "OK");
+            }
+            else
+            {
+                await Shell.Current.DisplayAlertAsync("Error", "Failed to export to calendar", "OK");
+            }
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlertAsync("Error", $"Failed to export: {ex.Message}", "OK");
         }
     }
 }

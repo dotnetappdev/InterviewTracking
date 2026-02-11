@@ -39,6 +39,7 @@ public static class MauiProgram
 		builder.Services.AddScoped<ISyncService, SyncService>();
 		builder.Services.AddScoped<INotificationService, NotificationService>();
 		builder.Services.AddScoped<IMeetingPlatformService, MeetingPlatformService>();
+		builder.Services.AddScoped<ICalendarExportService, CalendarExportService>();
 
 		// Register ViewModels
 		builder.Services.AddTransient<LoginViewModel>();

@@ -10,6 +10,7 @@ public partial class InterviewListViewModel : BaseViewModel
 {
     private readonly IInterviewLocalService _interviewService;
     private readonly ISyncService _syncService;
+    private readonly ICalendarExportService _calendarExportService;
 
     [ObservableProperty]
     private ObservableCollection<Interview> interviews = new();
@@ -20,10 +21,14 @@ public partial class InterviewListViewModel : BaseViewModel
     [ObservableProperty]
     private bool isRefreshing;
 
-    public InterviewListViewModel(IInterviewLocalService interviewService, ISyncService syncService)
+    public InterviewListViewModel(
+        IInterviewLocalService interviewService, 
+        ISyncService syncService,
+        ICalendarExportService calendarExportService)
     {
         _interviewService = interviewService;
         _syncService = syncService;
+        _calendarExportService = calendarExportService;
         Title = "Interviews";
     }
 
@@ -144,6 +149,30 @@ public partial class InterviewListViewModel : BaseViewModel
         catch (Exception ex)
         {
             await Shell.Current.DisplayAlert("Error", $"Failed to open meeting link: {ex.Message}", "OK");
+        }
+    }
+
+    [RelayCommand]
+    private async Task ExportToCalendarAsync(Interview interview)
+    {
+        if (interview == null) return;
+
+        try
+        {
+            var success = await _calendarExportService.ExportToDeviceCalendarAsync(interview);
+            
+            if (success)
+            {
+                await Shell.Current.DisplayAlertAsync("Success", "Interview exported to calendar", "OK");
+            }
+            else
+            {
+                await Shell.Current.DisplayAlertAsync("Error", "Failed to export to calendar", "OK");
+            }
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlertAsync("Error", $"Failed to export: {ex.Message}", "OK");
         }
     }
 
