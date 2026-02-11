@@ -19,6 +19,15 @@ public partial class InterviewListViewModel : BaseViewModel
     private ObservableCollection<Interview> upcomingInterviews = new();
 
     [ObservableProperty]
+    private ObservableCollection<Interview> filteredInterviews = new();
+
+    [ObservableProperty]
+    private DateTime? selectedDate = DateTime.Today;
+
+    [ObservableProperty]
+    private string interviewListTitle = "All Upcoming Interviews";
+
+    [ObservableProperty]
     private bool isRefreshing;
 
     public InterviewListViewModel(
@@ -54,6 +63,13 @@ public partial class InterviewListViewModel : BaseViewModel
             {
                 UpcomingInterviews.Add(interview);
             }
+
+            // Initialize filtered list with all upcoming interviews
+            FilteredInterviews.Clear();
+            foreach (var interview in upcoming)
+            {
+                FilteredInterviews.Add(interview);
+            }
         }
         catch (Exception ex)
         {
@@ -63,6 +79,31 @@ public partial class InterviewListViewModel : BaseViewModel
         {
             IsBusy = false;
             IsRefreshing = false;
+        }
+    }
+
+    public void FilterInterviewsByDate(DateTime date)
+    {
+        SelectedDate = date;
+        FilteredInterviews.Clear();
+
+        // Filter interviews for the selected date
+        var interviewsOnDate = UpcomingInterviews
+            .Where(i => i.DateTime.Date == date.Date)
+            .OrderBy(i => i.DateTime.TimeOfDay)
+            .ToList();
+
+        if (interviewsOnDate.Any())
+        {
+            InterviewListTitle = $"Interviews on {date:MMM dd, yyyy} ({interviewsOnDate.Count})";
+            foreach (var interview in interviewsOnDate)
+            {
+                FilteredInterviews.Add(interview);
+            }
+        }
+        else
+        {
+            InterviewListTitle = $"No interviews on {date:MMM dd, yyyy}";
         }
     }
 

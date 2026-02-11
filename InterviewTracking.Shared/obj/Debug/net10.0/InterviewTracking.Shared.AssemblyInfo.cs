@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InterviewTracking.Shared")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+755443ac423cbbfb68dc1371cb773f7a28f8d820")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+17119794b6d3a6290e8b9b96d4e28dd9a88e9280")]
 [assembly: System.Reflection.AssemblyProductAttribute("InterviewTracking.Shared")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InterviewTracking.Shared")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

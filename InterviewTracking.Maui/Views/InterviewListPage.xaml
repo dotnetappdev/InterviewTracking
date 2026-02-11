@@ -3,80 +3,104 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:InterviewTracking.Maui.ViewModels"
              xmlns:model="clr-namespace:InterviewTracking.Shared.Models;assembly=InterviewTracking.Shared"
+             xmlns:calendar="clr-namespace:Syncfusion.Maui.Calendar;assembly=Syncfusion.Maui.Calendar"
              x:Class="InterviewTracking.Maui.Views.InterviewListPage"
              x:DataType="vm:InterviewListViewModel"
              Title="{Binding Title}">
     
-    <Grid RowDefinitions="Auto,*">
+    <Grid RowDefinitions="Auto,Auto,*">
+        <!-- Action Buttons -->
         <HorizontalStackLayout Grid.Row="0" Padding="10" Spacing="10">
             <Button Text="Add Interview" Command="{Binding NavigateToAddInterviewCommand}" HorizontalOptions="FillAndExpand"/>
             <Button Text="Sync" Command="{Binding SyncInterviewsCommand}"/>
         </HorizontalStackLayout>
 
-        <RefreshView Grid.Row="1"
+        <!-- Calendar View -->
+        <Frame Grid.Row="1" Margin="10,0,10,10" Padding="5" BorderColor="Gray" CornerRadius="10" HasShadow="False">
+            <calendar:SfCalendar x:Name="calendar"
+                                View="Month"
+                                SelectionMode="Single"
+                                SelectedDate="{Binding SelectedDate, Mode=TwoWay}"
+                                SelectionChanged="OnCalendarSelectionChanged"
+                                HeightRequest="320"/>
+        </Frame>
+
+        <!-- Interview List -->
+        <RefreshView Grid.Row="2"
                      IsRefreshing="{Binding IsRefreshing}"
                      Command="{Binding LoadInterviewsCommand}">
-            <CollectionView ItemsSource="{Binding UpcomingInterviews}"
-                          SelectionMode="None">
-                <CollectionView.EmptyView>
-                    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
-                        <Label Text="No interviews scheduled"
-                               FontSize="18"
-                               HorizontalOptions="Center"/>
-                        <Label Text="Tap 'Add Interview' to get started"
-                               HorizontalOptions="Center"
-                               Margin="0,10,0,0"/>
-                    </VerticalStackLayout>
-                </CollectionView.EmptyView>
-
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:Interview">
-                        <Frame Margin="10,5" Padding="10" BorderColor="Gray" CornerRadius="10">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:InterviewListViewModel}}, Path=NavigateToInterviewDetailCommand}"
-                                                    CommandParameter="{Binding .}"/>
-                            </Frame.GestureRecognizers>
-                            
-                            <Grid ColumnDefinitions="*,Auto,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
-                                <Label Grid.Row="0" Grid.Column="0"
-                                       Text="{Binding Title}"
+            <ScrollView>
+                <VerticalStackLayout>
+                    <!-- Section Header -->
+                    <Label Text="{Binding InterviewListTitle}"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           Margin="15,10,15,5"/>
+                    
+                    <!-- Interview List -->
+                    <CollectionView ItemsSource="{Binding FilteredInterviews}"
+                                  SelectionMode="None">
+                        <CollectionView.EmptyView>
+                            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="20">
+                                <Label Text="No interviews scheduled"
                                        FontSize="18"
-                                       FontAttributes="Bold"/>
-                                
-                                <Label Grid.Row="1" Grid.Column="0"
-                                       Text="{Binding DateTime, StringFormat='{0:MMM dd, yyyy - hh:mm tt}'}"/>
-                                
-                                <Label Grid.Row="2" Grid.Column="0"
-                                       Text="{Binding Status, Converter={StaticResource InterviewStatusToStringConverter}, StringFormat='Status: {0}'}"
-                                       FontSize="12"
-                                       TextColor="{AppThemeBinding Light=DarkBlue, Dark=LightBlue}"/>
-                                
-                                <Label Grid.Row="3" Grid.Column="0"
-                                       Text="{Binding JobSource.Name, StringFormat='Source: {0}'}"
-                                       FontSize="12"
-                                       IsVisible="{Binding JobSource, Converter={StaticResource StringIsNotNullOrEmptyConverter}}"/>
-                                
-                                <Label Grid.Row="4" Grid.Column="0"
-                                       Text="{Binding Platform, StringFormat='Platform: {0}'}"/>
+                                       HorizontalOptions="Center"/>
+                                <Label Text="Tap 'Add Interview' to get started"
+                                       HorizontalOptions="Center"
+                                       Margin="0,10,0,0"/>
+                            </VerticalStackLayout>
+                        </CollectionView.EmptyView>
 
-                                <Button Grid.Row="0" Grid.Column="1" Grid.RowSpan="5"
-                                        Text="📅"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:InterviewListViewModel}}, Path=ExportToCalendarCommand}"
-                                        CommandParameter="{Binding .}"
-                                        VerticalOptions="Center"
-                                        Margin="5,0"/>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Interview">
+                                <Frame Margin="10,5" Padding="10" BorderColor="Gray" CornerRadius="10">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:InterviewListViewModel}}, Path=NavigateToInterviewDetailCommand}"
+                                                            CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+                                    
+                                    <Grid ColumnDefinitions="*,Auto,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+                                        <Label Grid.Row="0" Grid.Column="0"
+                                               Text="{Binding Title}"
+                                               FontSize="18"
+                                               FontAttributes="Bold"/>
+                                        
+                                        <Label Grid.Row="1" Grid.Column="0"
+                                               Text="{Binding DateTime, StringFormat='{0:MMM dd, yyyy - hh:mm tt}'}"/>
+                                        
+                                        <Label Grid.Row="2" Grid.Column="0"
+                                               Text="{Binding Status, Converter={StaticResource InterviewStatusToStringConverter}, StringFormat='Status: {0}'}"
+                                               FontSize="12"
+                                               TextColor="{AppThemeBinding Light=DarkBlue, Dark=LightBlue}"/>
+                                        
+                                        <Label Grid.Row="3" Grid.Column="0"
+                                               Text="{Binding JobSource.Name, StringFormat='Source: {0}'}"
+                                               FontSize="12"
+                                               IsVisible="{Binding JobSource, Converter={StaticResource StringIsNotNullOrEmptyConverter}}"/>
+                                        
+                                        <Label Grid.Row="4" Grid.Column="0"
+                                               Text="{Binding Platform, StringFormat='Platform: {0}'}"/>
 
-                                <Button Grid.Row="0" Grid.Column="2" Grid.RowSpan="5"
-                                        Text="Join"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:InterviewListViewModel}}, Path=OpenMeetingLinkCommand}"
-                                        CommandParameter="{Binding .}"
-                                        IsVisible="{Binding MeetingLink, Converter={StaticResource StringIsNotNullOrEmptyConverter}}"
-                                        VerticalOptions="Center"/>
-                            </Grid>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                                        <Button Grid.Row="0" Grid.Column="1" Grid.RowSpan="5"
+                                                Text="📅"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:InterviewListViewModel}}, Path=ExportToCalendarCommand}"
+                                                CommandParameter="{Binding .}"
+                                                VerticalOptions="Center"
+                                                Margin="5,0"/>
+
+                                        <Button Grid.Row="0" Grid.Column="2" Grid.RowSpan="5"
+                                                Text="Join"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:InterviewListViewModel}}, Path=OpenMeetingLinkCommand}"
+                                                CommandParameter="{Binding .}"
+                                                IsVisible="{Binding MeetingLink, Converter={StaticResource StringIsNotNullOrEmptyConverter}}"
+                                                VerticalOptions="Center"/>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </ScrollView>
         </RefreshView>
     </Grid>
 </ContentPage>
