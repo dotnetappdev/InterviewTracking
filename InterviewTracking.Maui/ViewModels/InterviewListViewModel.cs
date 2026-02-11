@@ -217,6 +217,26 @@ public partial class InterviewListViewModel : BaseViewModel
         }
     }
 
+    [RelayCommand]
+    private async Task CopyToClipboardAsync(string text)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            await Shell.Current.DisplayAlertAsync("Info", "Nothing to copy", "OK");
+            return;
+        }
+
+        try
+        {
+            await Clipboard.Default.SetTextAsync(text);
+            await Shell.Current.DisplayAlertAsync("Success", "Copied to clipboard", "OK");
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlertAsync("Error", $"Failed to copy: {ex.Message}", "OK");
+        }
+    }
+
     public async Task InitializeAsync()
     {
         await LoadInterviewsAsync();

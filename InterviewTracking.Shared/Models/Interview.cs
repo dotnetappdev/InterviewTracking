@@ -28,6 +28,11 @@ public class Interview
     public string JobTitle { get; set; } = string.Empty;
     public string CompanyName { get; set; } = string.Empty;
     
+    // Job portal credentials
+    public string JobPortalUrl { get; set; } = string.Empty;
+    public string JobPortalUsername { get; set; } = string.Empty;
+    public string JobPortalPassword { get; set; } = string.Empty;
+    
     // Recurrence properties
     public bool IsRecurring { get; set; }
     public RecurrencePattern? RecurrencePattern { get; set; }
