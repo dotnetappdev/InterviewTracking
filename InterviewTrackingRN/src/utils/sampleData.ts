@@ -1,6 +1,8 @@
 import { Interview, InterviewStatus, MeetingPlatform } from '../types';
 import DatabaseService from '../services/DatabaseService';
 
+// Sample interviews for testing and demonstration
+// Note: All sample data starts with isSynced=false to allow users to test sync functionality
 export const sampleInterviews: Interview[] = [
   {
     id: 'sample-1',
