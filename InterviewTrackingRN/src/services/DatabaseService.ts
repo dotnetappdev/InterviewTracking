@@ -122,7 +122,7 @@ class DatabaseService {
       [id]
     );
 
-    const reminders = await this.db.getAllAsync<Reminder>(
+    const reminders = await this.db.getAllAsync<any>(
       'SELECT * FROM reminders WHERE interviewId = ?',
       [id]
     );
@@ -142,7 +142,11 @@ class DatabaseService {
       isRecurring: result.isRecurring === 1,
       isSynced: result.isSynced === 1,
       interviewers,
-      reminders: reminders.map(r => ({ ...r, isEmailReminder: r.isEmailReminder === 1, isSent: r.isSent === 1 })),
+      reminders: reminders.map((r: any) => ({ 
+        ...r, 
+        isEmailReminder: r.isEmailReminder === 1, 
+        isSent: r.isSent === 1 
+      })),
       feedback,
       attachments,
     };

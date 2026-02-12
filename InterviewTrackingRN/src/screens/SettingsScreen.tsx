@@ -12,6 +12,7 @@ import {
 import { AppSettings } from '../types';
 import StorageService from '../services/StorageService';
 import DatabaseService from '../services/DatabaseService';
+import { loadSampleData } from '../utils/sampleData';
 
 export default function SettingsScreen() {
   const [settings, setSettings] = useState<AppSettings>({
@@ -63,6 +64,28 @@ export default function SettingsScreen() {
             } catch (error) {
               console.error('Failed to clear data:', error);
               Alert.alert('Error', 'Failed to clear data');
+            }
+          },
+        },
+      ]
+    );
+  };
+
+  const handleLoadSampleData = () => {
+    Alert.alert(
+      'Load Sample Data',
+      'This will add 5 sample interviews to your database. Continue?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Load',
+          onPress: async () => {
+            try {
+              await loadSampleData(DatabaseService);
+              Alert.alert('Success', 'Sample data has been loaded');
+            } catch (error) {
+              console.error('Failed to load sample data:', error);
+              Alert.alert('Error', 'Failed to load sample data');
             }
           },
         },
@@ -165,6 +188,10 @@ export default function SettingsScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Data Management</Text>
           
+          <TouchableOpacity style={styles.actionButton} onPress={handleLoadSampleData}>
+            <Text style={styles.actionButtonText}>Load Sample Data</Text>
+          </TouchableOpacity>
+          
           <TouchableOpacity style={styles.dangerButton} onPress={handleClearAllData}>
             <Text style={styles.dangerButtonText}>Clear All Data</Text>
           </TouchableOpacity>
@@ -245,6 +272,18 @@ const styles = StyleSheet.create({
   saveButtonText: {
     color: '#FFFFFF',
     fontSize: 18,
+    fontWeight: '600',
+  },
+  actionButton: {
+    backgroundColor: '#34C759',
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  actionButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
     fontWeight: '600',
   },
   dangerButton: {

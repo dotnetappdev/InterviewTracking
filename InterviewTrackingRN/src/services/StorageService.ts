@@ -38,7 +38,7 @@ class StorageService {
 
   async updateSetting(key: keyof AppSettings, value: any): Promise<void> {
     const settings = await this.getSettings();
-    settings[key] = value;
+    (settings as any)[key] = value;
     await this.saveSettings(settings);
   }
 
