@@ -1,4 +1,5 @@
 import { Interview, InterviewStatus, MeetingPlatform } from '../types';
+import DatabaseService from '../services/DatabaseService';
 
 export const sampleInterviews: Interview[] = [
   {
@@ -194,7 +195,7 @@ export const sampleInterviews: Interview[] = [
   },
 ];
 
-export async function loadSampleData(DatabaseService: any): Promise<void> {
+export async function loadSampleData(): Promise<void> {
   for (const interview of sampleInterviews) {
     try {
       await DatabaseService.createInterview(interview);

@@ -81,7 +81,7 @@ export default function SettingsScreen() {
           text: 'Load',
           onPress: async () => {
             try {
-              await loadSampleData(DatabaseService);
+              await loadSampleData();
               Alert.alert('Success', 'Sample data has been loaded');
             } catch (error) {
               console.error('Failed to load sample data:', error);
