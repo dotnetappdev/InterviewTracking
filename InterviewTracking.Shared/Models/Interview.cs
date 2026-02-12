@@ -41,6 +41,8 @@ public class Interview
     // Navigation properties
     public List<Interviewer> Interviewers { get; set; } = new();
     public List<Reminder> Reminders { get; set; } = new();
+    public List<InterviewFeedback> Feedback { get; set; } = new();
+    public List<InterviewAttachment> Attachments { get; set; } = new();
     
     // Sync properties
     public DateTime CreatedAt { get; set; }

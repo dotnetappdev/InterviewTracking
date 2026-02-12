@@ -51,7 +51,7 @@ public partial class InterviewDetailViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Error", $"Failed to load interview: {ex.Message}", "OK");
+            await Shell.Current.DisplayAlertAsync("Error", $"Failed to load interview: {ex.Message}", "OK");
         }
         finally
         {
@@ -72,7 +72,7 @@ public partial class InterviewDetailViewModel : BaseViewModel
     {
         if (Interview == null) return;
 
-        bool confirm = await Shell.Current.DisplayAlert(
+        bool confirm = await Shell.Current.DisplayAlertAsync(
             "Confirm Delete",
             $"Are you sure you want to delete '{Interview.Title}'?",
             "Yes",
@@ -87,7 +87,7 @@ public partial class InterviewDetailViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Error", $"Failed to delete interview: {ex.Message}", "OK");
+            await Shell.Current.DisplayAlertAsync("Error", $"Failed to delete interview: {ex.Message}", "OK");
         }
     }
 
@@ -103,7 +103,7 @@ public partial class InterviewDetailViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Error", $"Failed to open meeting link: {ex.Message}", "OK");
+            await Shell.Current.DisplayAlertAsync("Error", $"Failed to open meeting link: {ex.Message}", "OK");
         }
     }
 

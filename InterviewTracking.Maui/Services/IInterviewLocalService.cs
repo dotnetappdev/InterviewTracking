@@ -10,4 +10,6 @@ public interface IInterviewLocalService
     Task<Interview?> UpdateInterviewAsync(Interview interview);
     Task<bool> DeleteInterviewAsync(Guid id);
     Task<IEnumerable<Interview>> GetUpcomingInterviewsAsync();
+    Task<bool> ClearAllDataAsync();
+    Task<bool> ResetToSeedDataAsync();
 }

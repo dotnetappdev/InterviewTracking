@@ -118,4 +118,39 @@ public class InterviewLocalService : IInterviewLocalService
             .OrderBy(i => i.DateTime)
             .ToListAsync();
     }
+
+    public async Task<bool> ClearAllDataAsync()
+    {
+        try
+        {
+            // Remove all data from tables
+            _context.InterviewFeedback.RemoveRange(_context.InterviewFeedback);
+            _context.InterviewAttachments.RemoveRange(_context.InterviewAttachments);
+            _context.Reminders.RemoveRange(_context.Reminders);
+            _context.Interviewers.RemoveRange(_context.Interviewers);
+            _context.Interviews.RemoveRange(_context.Interviews);
+            
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    public async Task<bool> ResetToSeedDataAsync()
+    {
+        try
+        {
+            // Delete the database and recreate with seed data
+            await _context.Database.EnsureDeletedAsync();
+            await _context.Database.EnsureCreatedAsync();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
 }

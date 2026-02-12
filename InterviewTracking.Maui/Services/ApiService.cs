@@ -7,16 +7,44 @@ namespace InterviewTracking.Maui.Services;
 public class ApiService : IApiService
 {
     private readonly HttpClient _httpClient;
+    private readonly IPreferences _preferences;
 
-    public ApiService(HttpClient httpClient)
+    public ApiService(HttpClient httpClient, IPreferences preferences)
     {
         _httpClient = httpClient;
+        _preferences = preferences;
+    }
+
+    private void EnsureBaseAddress()
+    {
+        var apiUrl = _preferences.Get("api_url", "https://localhost:7000/api/");
+        if (!string.IsNullOrEmpty(apiUrl) && !apiUrl.EndsWith("/"))
+        {
+            apiUrl += "/";
+        }
+        
+        // Only update if different
+        if (_httpClient.BaseAddress?.ToString() != apiUrl)
+        {
+            _httpClient.BaseAddress = new Uri(apiUrl);
+        }
+    }
+
+    private bool IsApiEnabled()
+    {
+        return _preferences.Get("use_api", false);
     }
 
     public async Task<AuthResponse> RegisterAsync(RegisterRequest request)
     {
+        if (!IsApiEnabled())
+        {
+            return new AuthResponse { Success = false, Message = "API is disabled in settings" };
+        }
+
         try
         {
+            EnsureBaseAddress();
             var response = await _httpClient.PostAsJsonAsync("auth/register", request);
             return await response.Content.ReadFromJsonAsync<AuthResponse>() 
                 ?? new AuthResponse { Success = false, Message = "Failed to deserialize response" };
@@ -29,8 +57,14 @@ public class ApiService : IApiService
 
     public async Task<AuthResponse> LoginAsync(LoginRequest request)
     {
+        if (!IsApiEnabled())
+        {
+            return new AuthResponse { Success = false, Message = "API is disabled in settings" };
+        }
+
         try
         {
+            EnsureBaseAddress();
             var response = await _httpClient.PostAsJsonAsync("auth/login", request);
             return await response.Content.ReadFromJsonAsync<AuthResponse>() 
                 ?? new AuthResponse { Success = false, Message = "Failed to deserialize response" };
@@ -43,8 +77,14 @@ public class ApiService : IApiService
 
     public async Task<IEnumerable<Interview>> GetInterviewsAsync(string token)
     {
+        if (!IsApiEnabled())
+        {
+            return Array.Empty<Interview>();
+        }
+
         try
         {
+            EnsureBaseAddress();
             _httpClient.DefaultRequestHeaders.Authorization = 
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             
@@ -62,8 +102,14 @@ public class ApiService : IApiService
 
     public async Task<Interview?> GetInterviewAsync(Guid id, string token)
     {
+        if (!IsApiEnabled())
+        {
+            return null;
+        }
+
         try
         {
+            EnsureBaseAddress();
             _httpClient.DefaultRequestHeaders.Authorization = 
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             
@@ -80,31 +126,65 @@ public class ApiService : IApiService
 
     public async Task<Interview> CreateInterviewAsync(Interview interview, string token)
     {
-        _httpClient.DefaultRequestHeaders.Authorization = 
-            new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-        
-        var response = await _httpClient.PostAsJsonAsync("interviews", interview);
-        response.EnsureSuccessStatusCode();
-        
-        return await response.Content.ReadFromJsonAsync<Interview>() 
-            ?? interview;
+        if (!IsApiEnabled())
+        {
+            return interview;
+        }
+
+        try
+        {
+            EnsureBaseAddress();
+            _httpClient.DefaultRequestHeaders.Authorization = 
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            
+            var response = await _httpClient.PostAsJsonAsync("interviews", interview);
+            response.EnsureSuccessStatusCode();
+            
+            return await response.Content.ReadFromJsonAsync<Interview>() 
+                ?? interview;
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Create interview failed: {ex.Message}");
+            return interview;
+        }
     }
 
     public async Task<Interview?> UpdateInterviewAsync(Interview interview, string token)
     {
-        _httpClient.DefaultRequestHeaders.Authorization = 
-            new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-        
-        var response = await _httpClient.PutAsJsonAsync($"interviews/{interview.Id}", interview);
-        response.EnsureSuccessStatusCode();
-        
-        return await response.Content.ReadFromJsonAsync<Interview>();
+        if (!IsApiEnabled())
+        {
+            return interview;
+        }
+
+        try
+        {
+            EnsureBaseAddress();
+            _httpClient.DefaultRequestHeaders.Authorization = 
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            
+            var response = await _httpClient.PutAsJsonAsync($"interviews/{interview.Id}", interview);
+            response.EnsureSuccessStatusCode();
+            
+            return await response.Content.ReadFromJsonAsync<Interview>();
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Update interview failed: {ex.Message}");
+            return null;
+        }
     }
 
     public async Task<bool> DeleteInterviewAsync(Guid id, string token)
     {
+        if (!IsApiEnabled())
+        {
+            return false;
+        }
+
         try
         {
+            EnsureBaseAddress();
             _httpClient.DefaultRequestHeaders.Authorization = 
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             

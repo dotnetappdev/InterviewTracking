@@ -31,6 +31,11 @@ public class SyncService : ISyncService
 
     public async Task<bool> SyncAsync()
     {
+        // Check if API is enabled
+        var useApi = _preferences.Get("use_api", false);
+        if (!useApi)
+            return false;
+
         if (_connectivity.NetworkAccess != NetworkAccess.Internet)
             return false;
 
