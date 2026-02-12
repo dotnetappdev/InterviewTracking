@@ -33,8 +33,9 @@ public class DataExportImportService : IDataExportImportService
             await File.WriteAllTextAsync(filePath, json);
             return true;
         }
-        catch
+        catch (Exception ex)
         {
+            System.Diagnostics.Debug.WriteLine($"Export to file failed: {ex.Message}");
             return false;
         }
     }
@@ -51,8 +52,9 @@ public class DataExportImportService : IDataExportImportService
             var interviews = JsonSerializer.Deserialize<List<Interview>>(json, options);
             return Task.FromResult<IEnumerable<Interview>>(interviews ?? new List<Interview>());
         }
-        catch
+        catch (Exception ex)
         {
+            System.Diagnostics.Debug.WriteLine($"Import from JSON failed: {ex.Message}");
             return Task.FromResult<IEnumerable<Interview>>(new List<Interview>());
         }
     }
@@ -64,8 +66,9 @@ public class DataExportImportService : IDataExportImportService
             var json = await File.ReadAllTextAsync(filePath);
             return await ImportFromJsonAsync(json);
         }
-        catch
+        catch (Exception ex)
         {
+            System.Diagnostics.Debug.WriteLine($"Import from file failed: {ex.Message}");
             return new List<Interview>();
         }
     }

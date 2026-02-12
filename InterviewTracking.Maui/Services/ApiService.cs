@@ -131,15 +131,23 @@ public class ApiService : IApiService
             return interview;
         }
 
-        EnsureBaseAddress();
-        _httpClient.DefaultRequestHeaders.Authorization = 
-            new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-        
-        var response = await _httpClient.PostAsJsonAsync("interviews", interview);
-        response.EnsureSuccessStatusCode();
-        
-        return await response.Content.ReadFromJsonAsync<Interview>() 
-            ?? interview;
+        try
+        {
+            EnsureBaseAddress();
+            _httpClient.DefaultRequestHeaders.Authorization = 
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            
+            var response = await _httpClient.PostAsJsonAsync("interviews", interview);
+            response.EnsureSuccessStatusCode();
+            
+            return await response.Content.ReadFromJsonAsync<Interview>() 
+                ?? interview;
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Create interview failed: {ex.Message}");
+            return interview;
+        }
     }
 
     public async Task<Interview?> UpdateInterviewAsync(Interview interview, string token)
@@ -149,14 +157,22 @@ public class ApiService : IApiService
             return interview;
         }
 
-        EnsureBaseAddress();
-        _httpClient.DefaultRequestHeaders.Authorization = 
-            new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-        
-        var response = await _httpClient.PutAsJsonAsync($"interviews/{interview.Id}", interview);
-        response.EnsureSuccessStatusCode();
-        
-        return await response.Content.ReadFromJsonAsync<Interview>();
+        try
+        {
+            EnsureBaseAddress();
+            _httpClient.DefaultRequestHeaders.Authorization = 
+                new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            
+            var response = await _httpClient.PutAsJsonAsync($"interviews/{interview.Id}", interview);
+            response.EnsureSuccessStatusCode();
+            
+            return await response.Content.ReadFromJsonAsync<Interview>();
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Update interview failed: {ex.Message}");
+            return null;
+        }
     }
 
     public async Task<bool> DeleteInterviewAsync(Guid id, string token)

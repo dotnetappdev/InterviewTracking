@@ -244,14 +244,27 @@ public partial class SettingsViewModel : BaseViewModel
             {
                 var interviews = await _exportImportService.ImportFromFileAsync(result.FullPath);
                 
+                int imported = 0;
+                int skipped = 0;
+                
                 // Import interviews into local database
+                // Check for existing interviews by ID to avoid duplicates
                 foreach (var interview in interviews)
                 {
-                    await _interviewService.CreateInterviewAsync(interview);
+                    var existing = await _interviewService.GetInterviewByIdAsync(interview.Id);
+                    if (existing == null)
+                    {
+                        await _interviewService.CreateInterviewAsync(interview);
+                        imported++;
+                    }
+                    else
+                    {
+                        skipped++;
+                    }
                 }
                 
                 await Shell.Current.DisplayAlert("Success", 
-                    $"Successfully imported {interviews.Count()} interview(s)", "OK");
+                    $"Imported {imported} interview(s), skipped {skipped} duplicate(s)", "OK");
             }
         }
         catch (Exception ex)

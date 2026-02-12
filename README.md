@@ -8,10 +8,20 @@ A cross-platform interview scheduling and reminder application built with .NET M
 - **Interview Management**: Create, view, edit, and delete interviews
 - **Multi-platform Support**: iOS, Android, Windows
 - **Offline-First Design**: Works without internet using local SQLite database
-- **Cloud Synchronization**: Optional sync with ASP.NET Web API
+- **Configurable API**: Optional sync with ASP.NET Web API, API URL configurable in settings
 - **Meeting Platform Integration**: Supports Zoom, Google Meet, Microsoft Teams
 - **Reminders**: Multiple customizable reminders per interview
-- **Authentication**: Secure JWT-based authentication
+- **Authentication**: Secure JWT-based authentication (optional when API is enabled)
+
+### Enhanced Features
+- **Offline Mode**: Use app without API, all data stored locally
+- **Calendar Export**: Export interviews to device calendar (ICS format)
+- **Data Export/Import**: Export and import interview data as JSON
+- **Interview Feedback**: Score and provide feedback on interviews (1-5 scale)
+- **File Attachments**: Support for attaching resumes, job descriptions, and other files
+- **Email Reminders**: Configure email notifications for upcoming interviews
+- **Team Collaboration**: Track multiple interviewers per interview
+- **Job Source Tracking**: Track where job opportunities came from (LinkedIn, Indeed, etc.)
 
 ### User Interface
 - Clean, modern card-based design
@@ -93,6 +103,35 @@ dotnet build -t:Run -f net10.0-windows
 
 ## Configuration
 
+### App Settings
+
+The app can be configured through the Settings page:
+
+1. **API Configuration**
+   - Enable/Disable API: Toggle to use the app in offline-only or online mode
+   - API URL: Configure the base URL for your API server (default: `https://localhost:7000/api/`)
+   
+2. **Notifications**
+   - Enable push notifications for upcoming interviews
+   - Email reminders: Configure email address to receive reminders
+   
+3. **Synchronization**
+   - Enable/Disable sync with API
+   - Auto-sync: Automatically sync data when changes are made
+   - Manual sync: Trigger sync on demand
+   
+4. **Data Management**
+   - Export Data: Export all interviews to JSON file
+   - Import Data: Import interviews from JSON file
+   
+5. **Appearance**
+   - Dark Mode: Toggle between light and dark themes
+
+### Database Storage
+
+- **Windows**: SQLite database stored in `C:\ProgramData\InterviewTracking\interviews.db`
+- **iOS/Android**: SQLite database stored in app's data directory
+
 ### API Configuration
 
 Update `appsettings.json` in the API project:
@@ -109,14 +148,7 @@ Update `appsettings.json` in the API project:
 
 ### MAUI App Configuration
 
-Update the API base URL in `MauiProgram.cs`:
-
-```csharp
-builder.Services.AddHttpClient<IApiService, ApiService>(client =>
-{
-    client.BaseAddress = new Uri("https://your-api-url.com/api/");
-});
-```
+The API URL can be configured directly in the app's Settings page. No code changes required!
 
 ## Project Structure
 
@@ -148,13 +180,32 @@ InterviewTracking/
 
 ### Offline-First
 - Local SQLite database for offline access
-- Background sync when online
+- Background sync when online (optional)
 - Conflict resolution (last-write-wins)
+- Works completely offline when API is disabled
 
 ### Notifications
 - Platform-specific notification handlers
 - Multiple reminders per interview
 - Customizable reminder times
+- Email reminders (when API is enabled)
+
+### Data Management
+- Export all data to JSON format
+- Import data from JSON files
+- Calendar export (ICS format)
+- Share exported data via device sharing
+
+### Interview Feedback
+- 1-5 scoring system for multiple criteria
+- Track strengths and weaknesses
+- Recommendation tracking (Strong Yes to Strong No)
+- Multiple feedback entries per interview
+
+### File Attachments
+- Support for resumes, cover letters, job descriptions
+- File metadata tracking
+- Attachment types categorization
 
 ### Meeting Integration
 - Deep linking to native meeting apps
@@ -163,14 +214,13 @@ InterviewTracking/
 
 ## Future Enhancements
 
-- [ ] Email reminders
-- [ ] Calendar integration (Google Calendar, Outlook)
-- [ ] Interview feedback and scoring
-- [ ] File attachments (resume, job description)
-- [ ] Team collaboration features
-- [ ] Recurring interviews with advanced patterns
-- [ ] Export/import functionality
-- [ ] Analytics dashboard
+- [ ] Calendar integration (Google Calendar, Outlook) - Native API integration
+- [ ] Team collaboration features - Real-time collaboration
+- [ ] Recurring interviews with advanced patterns - More complex recurrence rules
+- [ ] Analytics dashboard - Interview statistics and insights
+- [ ] Advanced search and filtering
+- [ ] Interview preparation notes and checklists
+- [ ] Video interview recording integration
 
 ## Contributing
 
