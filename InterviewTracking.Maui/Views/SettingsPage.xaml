@@ -70,6 +70,44 @@
                 </VerticalStackLayout>
             </Frame>
             
+            <!-- Email Reminders Section -->
+            <Frame BorderColor="{AppThemeBinding Light=LightGray, Dark=Gray}" 
+                   CornerRadius="10" 
+                   Padding="15"
+                   HasShadow="False">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Email Reminders" 
+                           FontSize="18" 
+                           FontAttributes="Bold"/>
+                    
+                    <Grid ColumnDefinitions="*,Auto" RowSpacing="10">
+                        <Label Grid.Row="0" Grid.Column="0"
+                               Text="Enable Email Reminders" 
+                               VerticalOptions="Center"/>
+                        <Switch Grid.Row="0" Grid.Column="1"
+                                IsToggled="{Binding EmailRemindersEnabled}"
+                                VerticalOptions="Center"/>
+                    </Grid>
+                    
+                    <VerticalStackLayout Spacing="5" IsVisible="{Binding EmailRemindersEnabled}">
+                        <Label Text="Email Address" FontSize="14"/>
+                        <Entry Text="{Binding EmailReminderRecipient}" 
+                               Placeholder="your@email.com"
+                               Keyboard="Email"/>
+                        <Label Text="Email address to receive interview reminders"
+                               FontSize="12"
+                               TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}"/>
+                    </VerticalStackLayout>
+                    
+                    <BoxView HeightRequest="1" 
+                             Color="{AppThemeBinding Light=LightGray, Dark=Gray}"/>
+                    
+                    <Label Text="Note: Email reminders require API configuration"
+                           FontSize="12"
+                           TextColor="{AppThemeBinding Light=Orange, Dark=Orange}"/>
+                </VerticalStackLayout>
+            </Frame>
+            
             <!-- Sync Section -->
             <Frame BorderColor="{AppThemeBinding Light=LightGray, Dark=Gray}" 
                    CornerRadius="10" 
@@ -139,6 +177,30 @@
                     <Button Text="Sync Now" 
                             Command="{Binding SyncNowCommand}"
                             HorizontalOptions="Fill"/>
+                </VerticalStackLayout>
+            </Frame>
+            
+            <!-- Account Section -->
+            <Frame BorderColor="{AppThemeBinding Light=LightGray, Dark=Gray}" 
+                   CornerRadius="10" 
+                   Padding="15"
+                   HasShadow="False">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Data Management" 
+                           FontSize="18" 
+                           FontAttributes="Bold"/>
+                    
+                    <Button Text="Export Data" 
+                            Command="{Binding ExportDataCommand}"
+                            HorizontalOptions="Fill"/>
+                    
+                    <Button Text="Import Data" 
+                            Command="{Binding ImportDataCommand}"
+                            HorizontalOptions="Fill"/>
+                    
+                    <Label Text="Export or import your interview data as JSON"
+                           FontSize="12"
+                           TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}"/>
                 </VerticalStackLayout>
             </Frame>
             

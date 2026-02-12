@@ -15,6 +15,8 @@ public class LocalDbContext : DbContext
     public DbSet<Reminder> Reminders { get; set; }
     public DbSet<MeetingPlatformType> MeetingPlatformTypes { get; set; }
     public DbSet<JobSource> JobSources { get; set; }
+    public DbSet<InterviewFeedback> InterviewFeedback { get; set; }
+    public DbSet<InterviewAttachment> InterviewAttachments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -31,6 +33,18 @@ public class LocalDbContext : DbContext
             .HasMany(i => i.Reminders)
             .WithOne()
             .HasForeignKey(r => r.InterviewId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Entity<Interview>()
+            .HasMany(i => i.Feedback)
+            .WithOne()
+            .HasForeignKey(f => f.InterviewId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Entity<Interview>()
+            .HasMany(i => i.Attachments)
+            .WithOne()
+            .HasForeignKey(a => a.InterviewId)
             .OnDelete(DeleteBehavior.Cascade);
 
         // Configure Interview -> MeetingPlatformType relationship

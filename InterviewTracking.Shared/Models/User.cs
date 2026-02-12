@@ -20,4 +20,9 @@ public class UserSettings
     public bool OpenNativeApp { get; set; } = true;
     public int DefaultInterviewDuration { get; set; } = 60; // minutes
     public DayOfWeek WeekStartDay { get; set; } = DayOfWeek.Monday;
+    
+    // Email reminder settings
+    public bool EmailRemindersEnabled { get; set; }
+    public string EmailReminderRecipient { get; set; } = string.Empty;
+    public int EmailReminderMinutesBefore { get; set; } = 60;
 }

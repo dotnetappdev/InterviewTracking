@@ -9,6 +9,8 @@ public partial class SettingsViewModel : BaseViewModel
     private readonly IAuthLocalService _authService;
     private readonly ISyncService _syncService;
     private readonly IPreferences _preferences;
+    private readonly IInterviewLocalService _interviewService;
+    private readonly IDataExportImportService _exportImportService;
 
     [ObservableProperty]
     private bool darkMode;
@@ -34,14 +36,24 @@ public partial class SettingsViewModel : BaseViewModel
     [ObservableProperty]
     private bool useApi;
 
+    [ObservableProperty]
+    private bool emailRemindersEnabled;
+
+    [ObservableProperty]
+    private string emailReminderRecipient = string.Empty;
+
     public SettingsViewModel(
         IAuthLocalService authService,
         ISyncService syncService,
-        IPreferences preferences)
+        IPreferences preferences,
+        IInterviewLocalService interviewService,
+        IDataExportImportService exportImportService)
     {
         _authService = authService;
         _syncService = syncService;
         _preferences = preferences;
+        _interviewService = interviewService;
+        _exportImportService = exportImportService;
         Title = "Settings";
     }
 
@@ -53,6 +65,8 @@ public partial class SettingsViewModel : BaseViewModel
         AutoSync = _preferences.Get("auto_sync", false);
         UseApi = _preferences.Get("use_api", false);
         ApiUrl = _preferences.Get("api_url", "https://localhost:7000/api/");
+        EmailRemindersEnabled = _preferences.Get("email_reminders_enabled", false);
+        EmailReminderRecipient = _preferences.Get("email_reminder_recipient", string.Empty);
         LastSyncTime = await _syncService.GetLastSyncTimeAsync();
     }
 
@@ -86,6 +100,16 @@ public partial class SettingsViewModel : BaseViewModel
     partial void OnApiUrlChanged(string value)
     {
         _preferences.Set("api_url", value);
+    }
+
+    partial void OnEmailRemindersEnabledChanged(bool value)
+    {
+        _preferences.Set("email_reminders_enabled", value);
+    }
+
+    partial void OnEmailReminderRecipientChanged(string value)
+    {
+        _preferences.Set("email_reminder_recipient", value);
     }
 
     [RelayCommand]
@@ -158,5 +182,85 @@ public partial class SettingsViewModel : BaseViewModel
         if (!confirm) return;
 
         await Shell.Current.DisplayAlert("Info", "Account deletion feature coming soon", "OK");
+    }
+
+    [RelayCommand]
+    private async Task ExportDataAsync()
+    {
+        try
+        {
+            IsBusy = true;
+            
+            var interviews = await _interviewService.GetInterviewsAsync();
+            var fileName = $"interviews_export_{DateTime.Now:yyyyMMdd_HHmmss}.json";
+            var filePath = Path.Combine(FileSystem.CacheDirectory, fileName);
+            
+            var success = await _exportImportService.ExportToFileAsync(interviews, filePath);
+            
+            if (success)
+            {
+                // Share the file
+                await Share.Default.RequestAsync(new ShareFileRequest
+                {
+                    Title = "Export Interview Data",
+                    File = new ShareFile(filePath)
+                });
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Error", "Failed to export data", "OK");
+            }
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Error", $"Export failed: {ex.Message}", "OK");
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
+
+    [RelayCommand]
+    private async Task ImportDataAsync()
+    {
+        try
+        {
+            IsBusy = true;
+            
+            var result = await FilePicker.Default.PickAsync(new PickOptions
+            {
+                FileTypes = new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
+                {
+                    { DevicePlatform.iOS, new[] { "public.json" } },
+                    { DevicePlatform.Android, new[] { "application/json" } },
+                    { DevicePlatform.WinUI, new[] { ".json" } },
+                    { DevicePlatform.macOS, new[] { "json" } }
+                }),
+                PickerTitle = "Select Interview Data File"
+            });
+
+            if (result != null)
+            {
+                var interviews = await _exportImportService.ImportFromFileAsync(result.FullPath);
+                
+                // Import interviews into local database
+                foreach (var interview in interviews)
+                {
+                    await _interviewService.CreateInterviewAsync(interview);
+                }
+                
+                await Shell.Current.DisplayAlert("Success", 
+                    $"Successfully imported {interviews.Count()} interview(s)", "OK");
+            }
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Error", $"Import failed: {ex.Message}", "OK");
+        }
+        finally
+        {
+            IsBusy = false;
+        }
     }
 }
