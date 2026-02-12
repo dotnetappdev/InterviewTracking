@@ -276,4 +276,77 @@ public partial class SettingsViewModel : BaseViewModel
             IsBusy = false;
         }
     }
+
+    [RelayCommand]
+    private async Task ClearAllDataAsync()
+    {
+        bool confirm = await Shell.Current.DisplayAlert(
+            "Clear All Data",
+            "Are you sure you want to delete ALL interview data? This action cannot be undone.",
+            "Yes, Delete All",
+            "Cancel");
+
+        if (!confirm) return;
+
+        try
+        {
+            IsBusy = true;
+            
+            var success = await _interviewService.ClearAllDataAsync();
+            
+            if (success)
+            {
+                await Shell.Current.DisplayAlert("Success", "All interview data has been cleared", "OK");
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Error", "Failed to clear data", "OK");
+            }
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Error", $"Failed to clear data: {ex.Message}", "OK");
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
+
+    [RelayCommand]
+    private async Task ResetToSeedDataAsync()
+    {
+        bool confirm = await Shell.Current.DisplayAlert(
+            "Reset to Test Data",
+            "This will delete all current data and restore the original sample interviews. Continue?",
+            "Yes, Reset",
+            "Cancel");
+
+        if (!confirm) return;
+
+        try
+        {
+            IsBusy = true;
+            
+            var success = await _interviewService.ResetToSeedDataAsync();
+            
+            if (success)
+            {
+                await Shell.Current.DisplayAlert("Success", 
+                    "Database has been reset with sample data. Please restart the app to see changes.", "OK");
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Error", "Failed to reset database", "OK");
+            }
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Error", $"Failed to reset database: {ex.Message}", "OK");
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
 }

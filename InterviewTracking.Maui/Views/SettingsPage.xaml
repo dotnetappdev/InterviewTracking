@@ -198,7 +198,26 @@
                             Command="{Binding ImportDataCommand}"
                             HorizontalOptions="Fill"/>
                     
-                    <Label Text="Export or import your interview data as JSON"
+                    <BoxView HeightRequest="1" 
+                             Color="{AppThemeBinding Light=LightGray, Dark=Gray}"/>
+                    
+                    <Label Text="Test Data Management"
+                           FontSize="16"
+                           FontAttributes="Bold"/>
+                    
+                    <Button Text="Reset to Sample Data" 
+                            Command="{Binding ResetToSeedDataCommand}"
+                            HorizontalOptions="Fill"
+                            BackgroundColor="{AppThemeBinding Light=#FFF3E0, Dark=#E65100}"
+                            TextColor="{AppThemeBinding Light=#E65100, Dark=White}"/>
+                    
+                    <Button Text="Clear All Data" 
+                            Command="{Binding ClearAllDataCommand}"
+                            HorizontalOptions="Fill"
+                            BackgroundColor="{AppThemeBinding Light=#FFEBEE, Dark=#B71C1C}"
+                            TextColor="{AppThemeBinding Light=#D32F2F, Dark=White}"/>
+                    
+                    <Label Text="Export or import your interview data as JSON. Reset to restore sample data, or clear all to start fresh."
                            FontSize="12"
                            TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}"/>
                 </VerticalStackLayout>
