@@ -123,9 +123,38 @@ The app can be configured through the Settings page:
 4. **Data Management**
    - Export Data: Export all interviews to JSON file
    - Import Data: Import interviews from JSON file
+   - Reset to Sample Data: Restore 13 sample interviews with diverse positions
+   - Clear All Data: Remove all interviews from database
    
 5. **Appearance**
    - Dark Mode: Toggle between light and dark themes
+
+### Sample Data
+
+The app includes 13 pre-loaded sample interviews for testing:
+
+| Position | Company | Platform | Status |
+|----------|---------|----------|--------|
+| Senior Software Engineer | Acme Corporation | Zoom | Scheduled |
+| Product Manager | Beta Technologies | Google Meet | Stage1 |
+| DevOps Engineer | Cloud Innovations Inc | Microsoft Teams | Stage2 |
+| Data Scientist | DataViz Analytics | Zoom | FinalRound |
+| UX Designer | Design Studios Ltd | Google Meet | Scheduled |
+| Frontend Developer - React | TechStartup Inc | Zoom | Scheduled |
+| Backend Engineer - .NET | Enterprise Solutions Corp | Microsoft Teams | Stage1 |
+| Full Stack Developer | FinTech Innovations | Google Meet | Stage2 |
+| Mobile Developer - iOS | Mobile Apps Studio | Zoom | Scheduled |
+| QA Engineer - Automation | Quality Systems Inc | Microsoft Teams | Stage1 |
+| Technical Lead - Java | Global Tech Solutions | Google Meet | FinalRound |
+| Database Administrator | Data Systems Corp | Zoom | Scheduled |
+| Security Engineer | CyberSec Solutions | Microsoft Teams | Stage2 |
+
+**Sample Interviewers**: The app also includes 8 sample interviewer contacts (e.g., John Smith - Engineering Manager, Sarah Johnson - Senior Software Engineer) linked to specific interviews for testing collaboration features.
+
+**Managing Test Data**:
+- Use "Reset to Sample Data" in Settings to restore these samples
+- Use "Clear All Data" to start with a clean database
+- Both operations require confirmation to prevent accidental data loss
 
 ### Database Storage
 

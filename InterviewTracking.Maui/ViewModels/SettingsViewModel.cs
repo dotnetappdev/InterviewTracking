@@ -119,7 +119,7 @@ public partial class SettingsViewModel : BaseViewModel
 
         if (!UseApi)
         {
-            await Shell.Current.DisplayAlert("Info", "API is disabled. Enable API in settings to sync.", "OK");
+            await Shell.Current.DisplayAlertAsync("Info", "API is disabled. Enable API in settings to sync.", "OK");
             return;
         }
 
@@ -132,16 +132,16 @@ public partial class SettingsViewModel : BaseViewModel
             if (success)
             {
                 LastSyncTime = await _syncService.GetLastSyncTimeAsync();
-                await Shell.Current.DisplayAlert("Success", "Sync completed successfully", "OK");
+                await Shell.Current.DisplayAlertAsync("Success", "Sync completed successfully", "OK");
             }
             else
             {
-                await Shell.Current.DisplayAlert("Info", "Sync failed. Check your internet connection and API URL.", "OK");
+                await Shell.Current.DisplayAlertAsync("Info", "Sync failed. Check your internet connection and API URL.", "OK");
             }
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Error", $"Sync failed: {ex.Message}", "OK");
+            await Shell.Current.DisplayAlertAsync("Error", $"Sync failed: {ex.Message}", "OK");
         }
         finally
         {
@@ -152,7 +152,7 @@ public partial class SettingsViewModel : BaseViewModel
     [RelayCommand]
     private async Task LogoutAsync()
     {
-        bool confirm = await Shell.Current.DisplayAlert(
+        bool confirm = await Shell.Current.DisplayAlertAsync(
             "Confirm Logout",
             "Are you sure you want to logout?",
             "Yes",
@@ -167,13 +167,13 @@ public partial class SettingsViewModel : BaseViewModel
     [RelayCommand]
     private async Task ChangePasswordAsync()
     {
-        await Shell.Current.DisplayAlert("Info", "Change password feature coming soon", "OK");
+        await Shell.Current.DisplayAlertAsync("Info", "Change password feature coming soon", "OK");
     }
 
     [RelayCommand]
     private async Task DeleteAccountAsync()
     {
-        bool confirm = await Shell.Current.DisplayAlert(
+        bool confirm = await Shell.Current.DisplayAlertAsync(
             "Confirm Account Deletion",
             "Are you sure you want to delete your account? This action cannot be undone.",
             "Yes, Delete",
@@ -181,7 +181,7 @@ public partial class SettingsViewModel : BaseViewModel
 
         if (!confirm) return;
 
-        await Shell.Current.DisplayAlert("Info", "Account deletion feature coming soon", "OK");
+        await Shell.Current.DisplayAlertAsync("Info", "Account deletion feature coming soon", "OK");
     }
 
     [RelayCommand]
@@ -208,12 +208,12 @@ public partial class SettingsViewModel : BaseViewModel
             }
             else
             {
-                await Shell.Current.DisplayAlert("Error", "Failed to export data", "OK");
+                await Shell.Current.DisplayAlertAsync("Error", "Failed to export data", "OK");
             }
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Error", $"Export failed: {ex.Message}", "OK");
+            await Shell.Current.DisplayAlertAsync("Error", $"Export failed: {ex.Message}", "OK");
         }
         finally
         {
@@ -263,13 +263,13 @@ public partial class SettingsViewModel : BaseViewModel
                     }
                 }
                 
-                await Shell.Current.DisplayAlert("Success", 
+                await Shell.Current.DisplayAlertAsync("Success", 
                     $"Imported {imported} interview(s), skipped {skipped} duplicate(s)", "OK");
             }
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Error", $"Import failed: {ex.Message}", "OK");
+            await Shell.Current.DisplayAlertAsync("Error", $"Import failed: {ex.Message}", "OK");
         }
         finally
         {
@@ -280,7 +280,7 @@ public partial class SettingsViewModel : BaseViewModel
     [RelayCommand]
     private async Task ClearAllDataAsync()
     {
-        bool confirm = await Shell.Current.DisplayAlert(
+        bool confirm = await Shell.Current.DisplayAlertAsync(
             "Clear All Data",
             "Are you sure you want to delete ALL interview data? This action cannot be undone.",
             "Yes, Delete All",
@@ -296,16 +296,16 @@ public partial class SettingsViewModel : BaseViewModel
             
             if (success)
             {
-                await Shell.Current.DisplayAlert("Success", "All interview data has been cleared", "OK");
+                await Shell.Current.DisplayAlertAsync("Success", "All interview data has been cleared", "OK");
             }
             else
             {
-                await Shell.Current.DisplayAlert("Error", "Failed to clear data", "OK");
+                await Shell.Current.DisplayAlertAsync("Error", "Failed to clear data", "OK");
             }
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Error", $"Failed to clear data: {ex.Message}", "OK");
+            await Shell.Current.DisplayAlertAsync("Error", $"Failed to clear data: {ex.Message}", "OK");
         }
         finally
         {
@@ -316,7 +316,7 @@ public partial class SettingsViewModel : BaseViewModel
     [RelayCommand]
     private async Task ResetToSeedDataAsync()
     {
-        bool confirm = await Shell.Current.DisplayAlert(
+        bool confirm = await Shell.Current.DisplayAlertAsync(
             "Reset to Test Data",
             "This will delete all current data and restore the original sample interviews. Continue?",
             "Yes, Reset",
@@ -332,17 +332,17 @@ public partial class SettingsViewModel : BaseViewModel
             
             if (success)
             {
-                await Shell.Current.DisplayAlert("Success", 
+                await Shell.Current.DisplayAlertAsync("Success", 
                     "Database has been reset with sample data. Please restart the app to see changes.", "OK");
             }
             else
             {
-                await Shell.Current.DisplayAlert("Error", "Failed to reset database", "OK");
+                await Shell.Current.DisplayAlertAsync("Error", "Failed to reset database", "OK");
             }
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Error", $"Failed to reset database: {ex.Message}", "OK");
+            await Shell.Current.DisplayAlertAsync("Error", $"Failed to reset database: {ex.Message}", "OK");
         }
         finally
         {

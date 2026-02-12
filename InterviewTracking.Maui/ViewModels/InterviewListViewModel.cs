@@ -82,7 +82,7 @@ public partial class InterviewListViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Error", $"Failed to load interviews: {ex.Message}", "OK");
+            await Shell.Current.DisplayAlertAsync("Error", $"Failed to load interviews: {ex.Message}", "OK");
         }
         finally
         {
@@ -130,16 +130,16 @@ public partial class InterviewListViewModel : BaseViewModel
             if (success)
             {
                 await LoadInterviewsAsync();
-                await Shell.Current.DisplayAlert("Success", "Sync completed successfully", "OK");
+                await Shell.Current.DisplayAlertAsync("Success", "Sync completed successfully", "OK");
             }
             else
             {
-                await Shell.Current.DisplayAlert("Info", "Sync failed. Check your internet connection.", "OK");
+                await Shell.Current.DisplayAlertAsync("Info", "Sync failed. Check your internet connection.", "OK");
             }
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Error", $"Sync failed: {ex.Message}", "OK");
+            await Shell.Current.DisplayAlertAsync("Error", $"Sync failed: {ex.Message}", "OK");
         }
         finally
         {
@@ -166,7 +166,7 @@ public partial class InterviewListViewModel : BaseViewModel
     {
         if (interview == null) return;
 
-        bool confirm = await Shell.Current.DisplayAlert(
+        bool confirm = await Shell.Current.DisplayAlertAsync(
             "Confirm Delete",
             $"Are you sure you want to delete '{interview.Title}'?",
             "Yes",
@@ -182,7 +182,7 @@ public partial class InterviewListViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Error", $"Failed to delete interview: {ex.Message}", "OK");
+            await Shell.Current.DisplayAlertAsync("Error", $"Failed to delete interview: {ex.Message}", "OK");
         }
     }
 
@@ -198,7 +198,7 @@ public partial class InterviewListViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Error", $"Failed to open meeting link: {ex.Message}", "OK");
+            await Shell.Current.DisplayAlertAsync("Error", $"Failed to open meeting link: {ex.Message}", "OK");
         }
     }
 
