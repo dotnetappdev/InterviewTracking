@@ -28,6 +28,12 @@ public partial class SettingsViewModel : BaseViewModel
     [ObservableProperty]
     private string email = string.Empty;
 
+    [ObservableProperty]
+    private string apiUrl = string.Empty;
+
+    [ObservableProperty]
+    private bool useApi;
+
     public SettingsViewModel(
         IAuthLocalService authService,
         ISyncService syncService,
@@ -45,6 +51,8 @@ public partial class SettingsViewModel : BaseViewModel
         NotificationsEnabled = _preferences.Get("notifications_enabled", true);
         SyncEnabled = _preferences.Get("sync_enabled", true);
         AutoSync = _preferences.Get("auto_sync", false);
+        UseApi = _preferences.Get("use_api", false);
+        ApiUrl = _preferences.Get("api_url", "https://localhost:7000/api/");
         LastSyncTime = await _syncService.GetLastSyncTimeAsync();
     }
 
@@ -70,10 +78,26 @@ public partial class SettingsViewModel : BaseViewModel
         _preferences.Set("auto_sync", value);
     }
 
+    partial void OnUseApiChanged(bool value)
+    {
+        _preferences.Set("use_api", value);
+    }
+
+    partial void OnApiUrlChanged(string value)
+    {
+        _preferences.Set("api_url", value);
+    }
+
     [RelayCommand]
     private async Task SyncNowAsync()
     {
         if (IsBusy) return;
+
+        if (!UseApi)
+        {
+            await Shell.Current.DisplayAlert("Info", "API is disabled. Enable API in settings to sync.", "OK");
+            return;
+        }
 
         try
         {
@@ -88,7 +112,7 @@ public partial class SettingsViewModel : BaseViewModel
             }
             else
             {
-                await Shell.Current.DisplayAlert("Info", "Sync failed. Check your internet connection.", "OK");
+                await Shell.Current.DisplayAlert("Info", "Sync failed. Check your internet connection and API URL.", "OK");
             }
         }
         catch (Exception ex)

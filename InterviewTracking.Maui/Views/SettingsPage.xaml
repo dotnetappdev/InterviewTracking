@@ -76,6 +76,38 @@
                    Padding="15"
                    HasShadow="False">
                 <VerticalStackLayout Spacing="15">
+                    <Label Text="API Configuration" 
+                           FontSize="18" 
+                           FontAttributes="Bold"/>
+                    
+                    <Grid ColumnDefinitions="*,Auto" RowSpacing="10">
+                        <Label Grid.Row="0" Grid.Column="0"
+                               Text="Use API" 
+                               VerticalOptions="Center"/>
+                        <Switch Grid.Row="0" Grid.Column="1"
+                                IsToggled="{Binding UseApi}"
+                                VerticalOptions="Center"/>
+                    </Grid>
+                    
+                    <VerticalStackLayout Spacing="5" IsVisible="{Binding UseApi}">
+                        <Label Text="API URL" FontSize="14"/>
+                        <Entry Text="{Binding ApiUrl}" 
+                               Placeholder="https://localhost:7000/api/"
+                               Keyboard="Url"/>
+                        <Label Text="Enter the base URL for your API server"
+                               FontSize="12"
+                               TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}"/>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+            
+            <!-- Sync Section -->
+            <Frame BorderColor="{AppThemeBinding Light=LightGray, Dark=Gray}" 
+                   CornerRadius="10" 
+                   Padding="15"
+                   HasShadow="False"
+                   IsVisible="{Binding UseApi}">
+                <VerticalStackLayout Spacing="15">
                     <Label Text="Synchronization" 
                            FontSize="18" 
                            FontAttributes="Bold"/>

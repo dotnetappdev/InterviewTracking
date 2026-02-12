@@ -47,6 +47,25 @@
                     Command="{Binding NavigateToRegisterCommand}"
                     BackgroundColor="Transparent"
                     TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
+
+            <BoxView HeightRequest="1" 
+                     Color="{AppThemeBinding Light=LightGray, Dark=Gray}"
+                     Margin="0,20,0,10"/>
+
+            <Label Text="OR"
+                   FontSize="14"
+                   HorizontalOptions="Center"
+                   TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}"/>
+
+            <Button Text="Continue Offline"
+                    Command="{Binding SkipLoginCommand}"
+                    BackgroundColor="Transparent"
+                    TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}"/>
+
+            <Label Text="Use the app without an account (offline mode)"
+                   FontSize="12"
+                   HorizontalOptions="Center"
+                   TextColor="{AppThemeBinding Light=Gray, Dark=LightGray}"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

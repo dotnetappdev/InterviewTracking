@@ -23,7 +23,7 @@ public static class MauiProgram
 			});
 
 		// Configure SQLite database
-		var dbPath = Path.Combine(FileSystem.AppDataDirectory, "interviews.db");
+		var dbPath = GetDatabasePath();
 		builder.Services.AddDbContext<LocalDbContext>(options =>
 			options.UseSqlite($"Data Source={dbPath}"));
 
@@ -63,5 +63,25 @@ public static class MauiProgram
 #endif
 
 		return builder.Build();
+	}
+
+	private static string GetDatabasePath()
+	{
+#if WINDOWS
+		// On Windows, store in ProgramData
+		var programDataPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+		var appFolder = Path.Combine(programDataPath, "InterviewTracking");
+		
+		// Create directory if it doesn't exist
+		if (!Directory.Exists(appFolder))
+		{
+			Directory.CreateDirectory(appFolder);
+		}
+		
+		return Path.Combine(appFolder, "interviews.db");
+#else
+		// On other platforms, use standard app data directory
+		return Path.Combine(FileSystem.AppDataDirectory, "interviews.db");
+#endif
 	}
 }

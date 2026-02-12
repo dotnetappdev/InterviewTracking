@@ -9,6 +9,7 @@ public partial class LoginViewModel : BaseViewModel
 {
     private readonly IApiService _apiService;
     private readonly IAuthLocalService _authService;
+    private readonly IPreferences _preferences;
 
     [ObservableProperty]
     private string email = string.Empty;
@@ -19,10 +20,11 @@ public partial class LoginViewModel : BaseViewModel
     [ObservableProperty]
     private string errorMessage = string.Empty;
 
-    public LoginViewModel(IApiService apiService, IAuthLocalService authService)
+    public LoginViewModel(IApiService apiService, IAuthLocalService authService, IPreferences preferences)
     {
         _apiService = apiService;
         _authService = authService;
+        _preferences = preferences;
         Title = "Login";
     }
 
@@ -30,6 +32,16 @@ public partial class LoginViewModel : BaseViewModel
     private async Task LoginAsync()
     {
         if (IsBusy) return;
+
+        // Check if API is enabled
+        var useApi = _preferences.Get("use_api", false);
+        
+        if (!useApi)
+        {
+            // Skip login when API is disabled, go directly to main page
+            await Shell.Current.GoToAsync("///InterviewList");
+            return;
+        }
 
         if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password))
         {
@@ -77,5 +89,12 @@ public partial class LoginViewModel : BaseViewModel
     private async Task NavigateToRegisterAsync()
     {
         await Shell.Current.GoToAsync("//Register");
+    }
+
+    [RelayCommand]
+    private async Task SkipLoginAsync()
+    {
+        // Allow users to skip login and use the app in offline mode
+        await Shell.Current.GoToAsync("///InterviewList");
     }
 }
