@@ -1,6 +1,27 @@
 # Interview Tracking System
 
-A cross-platform interview scheduling and reminder application built with .NET MAUI and ASP.NET Web API.
+A cross-platform interview scheduling and reminder application available in two versions:
+- **.NET MAUI** - Native C# application for iOS, Android, and Windows
+- **React Native** - JavaScript/TypeScript application for iOS, Android, and Web
+
+Both versions share the same ASP.NET Web API backend and feature set.
+
+## 📱 Available Versions
+
+### .NET MAUI Version
+Located in `/InterviewTracking.Maui/`
+- Native performance
+- Windows desktop support
+- Full .NET ecosystem integration
+- See MAUI-specific documentation below
+
+### React Native Version  
+Located in `/InterviewTrackingRN/`
+- Cross-platform with Expo
+- Web browser support
+- Hot reloading for rapid development
+- **[📖 React Native Quick Start](./InterviewTrackingRN/QUICKSTART.md)**
+- **[📚 React Native Documentation](./InterviewTrackingRN/README.md)**
 
 ## Features
 
@@ -32,21 +53,47 @@ A cross-platform interview scheduling and reminder application built with .NET M
 ## Architecture
 
 ### Projects
-1. **InterviewTracking.Maui** - Cross-platform mobile/desktop client
-2. **InterviewTracking.Api** - ASP.NET Web API backend
-3. **InterviewTracking.Shared** - Shared models and DTOs
+1. **InterviewTracking.Maui** - .NET MAUI cross-platform mobile/desktop client
+2. **InterviewTrackingRN** - React Native cross-platform mobile/web client (NEW!)
+3. **InterviewTracking.Api** - ASP.NET Web API backend (shared by both clients)
+4. **InterviewTracking.Shared** - Shared models and DTOs
 
 ### Technologies
+
+#### MAUI Version
 - .NET 10
 - .NET MAUI (Multi-platform App UI)
-- ASP.NET Core Web API
 - Entity Framework Core
 - SQLite (local storage)
-- ASP.NET Identity
-- JWT Authentication
 - MVVM Pattern (CommunityToolkit.Mvvm)
 
+#### React Native Version
+- React Native 0.81.5
+- Expo SDK ~54
+- TypeScript
+- SQLite (expo-sqlite)
+- React Navigation
+
+#### Shared Backend
+- ASP.NET Core Web API
+- ASP.NET Identity
+- JWT Authentication
+
 ## Getting Started
+
+### Choose Your Platform
+
+#### React Native (Recommended for Quick Start)
+```bash
+cd InterviewTrackingRN
+npm install
+npm start
+# Scan QR code with Expo Go app or press 'w' for web
+```
+
+See [React Native Quick Start Guide](./InterviewTrackingRN/QUICKSTART.md) for detailed instructions.
+
+#### .NET MAUI
 
 ### Prerequisites
 - .NET 10 SDK
